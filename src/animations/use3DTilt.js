@@ -1,32 +1,52 @@
-import { useState, useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import gsap from 'gsap';
 
-export const use3DTilt = () => {
+export const use3DTilt = (intensity = 20) => {
     const ref = useRef(null);
-    const [style, setStyle] = useState({});
+
+    // Persist GSAP QuickTo instances via useRef
+    const qX = useRef(null);
+    const qY = useRef(null);
+
+    useEffect(() => {
+        if (!ref.current) return;
+
+        // Initialize GSAP QuickTo for 60fps tracking
+        qX.current = gsap.quickTo(ref.current, "rotateX", { duration: 0.5, ease: "power3.out" });
+        qY.current = gsap.quickTo(ref.current, "rotateY", { duration: 0.5, ease: "power3.out" });
+
+        // Set initial 3D transform properties
+        gsap.set(ref.current, {
+            transformPerspective: 1000,
+            transformStyle: "preserve-3d"
+        });
+
+    }, []);
 
     const onMouseMove = (e) => {
-        if (!ref.current) return;
-        const { left, top, width, height } = ref.current.getBoundingClientRect();
-        const x = (e.clientX - left) / width;
-        const y = (e.clientY - top) / height;
+        if (!ref.current || !qX.current || !qY.current) return;
 
-        const multiplier = 20;
+        const rect = ref.current.getBoundingClientRect();
 
-        const rotateX = (y - 0.5) * -multiplier;
-        const rotateY = (x - 0.5) * multiplier;
+        // Calculate relative mouse position (0.0 to 1.0)
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
 
-        setStyle({
-            transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`,
-            transition: 'transform 0.1s ease-out',
-        });
+        // Map to angle
+        const rotateX = (y - 0.5) * -intensity;
+        const rotateY = (x - 0.5) * intensity;
+
+        qX.current(rotateX);
+        qY.current(rotateY);
     };
 
     const onMouseLeave = () => {
-        setStyle({
-            transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
-            transition: 'transform 0.5s ease-out',
-        });
+        if (!qX.current || !qY.current) return;
+
+        // Snap back to 0
+        qX.current(0);
+        qY.current(0);
     };
 
-    return { ref, style, onMouseMove, onMouseLeave };
+    return { ref, onMouseMove, onMouseLeave };
 };

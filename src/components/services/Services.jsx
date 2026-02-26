@@ -17,7 +17,7 @@ const ServiceCard = ({ service }) => {
             style={style}
             onMouseMove={onMouseMove}
             onMouseLeave={onMouseLeave}
-            className="w-[85vw] md:w-[45vw] lg:w-[35vw] h-[65vh] md:h-[75vh] rounded-[2rem] p-8 md:p-10 flex flex-col justify-end relative overflow-hidden group cursor-pointer border border-white/10 dark:border-white/5 bg-black hover:border-cyan-500/50 transition-colors duration-700"
+            className="w-[85vw] md:w-[45vw] lg:w-[35vw] h-[65vh] md:h-[75vh] rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-end relative overflow-hidden group cursor-pointer border border-border bg-card-bg shadow-premium backdrop-blur-glass transition-all duration-700 hover:-translate-y-4"
             onClick={() => navigate('/programs')}
         >
             {/* Background Image Parallax effect via CSS */}
@@ -32,27 +32,27 @@ const ServiceCard = ({ service }) => {
                 />
             </div>
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-10"></div>
-            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 z-10 mix-blend-overlay"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent dark:from-black dark:via-black/80 dark:to-transparent z-10 transition-colors duration-500"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 z-10 mix-blend-multiply dark:mix-blend-overlay"></div>
 
             <div className="relative z-20 flex flex-col h-full justify-between transform translate-y-8 group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]">
                 <div className="flex justify-between items-start opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">
-                    <span className="text-cyan-400 font-mono text-xs md:text-sm font-bold tracking-widest uppercase py-1.5 px-4 border border-cyan-400/30 rounded-full bg-cyan-400/10 backdrop-blur-sm shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+                    <span className="text-cyan-600 dark:text-cyan-400 font-mono text-xs md:text-sm font-bold tracking-widest uppercase py-2 px-5 border border-cyan-400/30 rounded-full bg-card-bg backdrop-blur-glass shadow-premium">
                         {service.category}
                     </span>
-                    <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-white/5 backdrop-blur-md group-hover:bg-white group-hover:text-black transition-all duration-500 hover:scale-110">
-                        <svg className="w-5 h-5 translate-x-[1px] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    <div className="w-14 h-14 rounded-full border border-border flex items-center justify-center bg-card-bg backdrop-blur-glass group-hover:bg-foreground group-hover:text-background transition-all duration-500 hover:scale-110 shadow-premium">
+                        <svg className="w-6 h-6 translate-x-[1px] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                     </div>
                 </div>
 
                 <div>
-                    <span className="block text-white/50 text-sm tracking-widest uppercase mb-3 font-medium">
+                    <span className="block text-foreground/50 text-sm tracking-widest uppercase mb-4 font-bold">
                         {service.duration}
                     </span>
-                    <h3 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 uppercase tracking-tighter leading-[0.9] group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/50 transition-all duration-500">
+                    <h3 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-6 uppercase tracking-tighter leading-[0.9] group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-foreground group-hover:to-foreground/50 transition-all duration-500">
                         {service.title}
                     </h3>
-                    <p className="text-white/60 text-base md:text-lg mb-8 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200 line-clamp-2">
+                    <p className="text-foreground/70 text-base md:text-lg mb-8 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200 line-clamp-2 font-medium">
                         {service.description}
                     </p>
 

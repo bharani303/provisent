@@ -108,7 +108,7 @@ const Navbar = () => {
             <nav
                 ref={navRef}
                 className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled
-                    ? 'py-4 bg-background/80 backdrop-blur-xl border-b border-border shadow-sm'
+                    ? 'py-4 bg-card-bg backdrop-blur-glass border-b border-border shadow-premium'
                     : 'py-6 bg-transparent'
                     }`}
             >

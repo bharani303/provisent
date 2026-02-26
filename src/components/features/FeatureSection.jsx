@@ -51,17 +51,17 @@ const FeatureSection = () => {
     }, []);
 
     return (
-        <section ref={sectionRef} className="py-32 bg-[#0B0F1A] relative z-10" id="studio">
+        <section ref={sectionRef} className="py-32 bg-background relative z-10 transition-colors duration-500" id="studio">
             <div className="container mx-auto px-6">
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 
-                    <div className="relative h-[700px] w-full rounded-[3rem] overflow-hidden glass-panel group border-white/5">
+                    <div className="relative h-[700px] w-full rounded-[3rem] overflow-hidden bg-card-bg group border border-border shadow-premium backdrop-blur-glass">
                         {/* Parallax Image container */}
-                        <div className="absolute inset-[-20%] w-[140%] h-[140%] ft-image bg-[url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop')] bg-cover bg-center mix-blend-luminosity opacity-30 transition-opacity duration-1000 group-hover:opacity-70 group-hover:mix-blend-normal"></div>
+                        <div className="absolute inset-[-20%] w-[140%] h-[140%] ft-image bg-[url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop')] bg-cover bg-center mix-blend-multiply opacity-20 transition-opacity duration-1000 group-hover:opacity-100 group-hover:mix-blend-normal dark:mix-blend-luminosity dark:opacity-30"></div>
 
                         {/* Gradient overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F1A] via-[#0B0F1A]/20 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent dark:from-black dark:via-black/20 dark:to-transparent transition-colors duration-500"></div>
 
                         <div className="absolute top-12 left-12">
                             <div className="text-pink-500 font-black text-6xl opacity-10 uppercase tracking-tighter leading-none">
@@ -70,17 +70,17 @@ const FeatureSection = () => {
                         </div>
 
                         <div className="absolute bottom-12 left-12 right-12 z-10">
-                            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/5 backdrop-blur-xl border border-white/10 mb-8 group-hover:scale-110 group-hover:border-cyan-400 group-hover:shadow-[0_0_30px_rgba(34,211,238,0.3)] transition-all duration-700">
-                                <span className="w-5 h-5 rounded-full bg-cyan-400 animate-pulse"></span>
+                            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-foreground text-background mb-8 group-hover:scale-110 group-hover:bg-cyan-500 group-hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] transition-all duration-700">
+                                <span className="w-5 h-5 rounded-full bg-background animate-pulse"></span>
                             </div>
-                            <h3 className="text-4xl font-black text-white uppercase tracking-tight mb-2">Democratizing Education</h3>
-                            <p className="text-white/40 text-sm tracking-widest uppercase">Our Mission since 2018</p>
+                            <h3 className="text-4xl font-black text-foreground uppercase tracking-tight mb-2">Democratizing Education</h3>
+                            <p className="text-foreground/40 text-sm tracking-widest uppercase">Our Mission since 2018</p>
                         </div>
                     </div>
 
                     <div>
                         <div className="overflow-hidden mb-8">
-                            <h2 className="ft-title text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.9]">
+                            <h2 className="ft-title text-5xl md:text-7xl font-black text-foreground uppercase tracking-tighter leading-[0.9]">
                                 Why Choose <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 animate-gradient">
                                     Provisent?
@@ -99,8 +99,8 @@ const FeatureSection = () => {
                                         0{i + 1}
                                     </div>
                                     <div className="relative z-10">
-                                        <h4 className="text-2xl font-black text-white mb-4 uppercase tracking-tighter">{f.title}</h4>
-                                        <p className="text-white/40 text-base leading-relaxed">{f.desc}</p>
+                                        <h4 className="text-2xl font-black text-foreground mb-4 uppercase tracking-tighter">{f.title}</h4>
+                                        <p className="text-foreground/40 text-base leading-relaxed font-medium">{f.desc}</p>
                                     </div>
                                 </div>
                             ))}

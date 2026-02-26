@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { Target, Lightbulb, Rocket, Globe, Shield, Zap } from 'lucide-react';
 
 const InteractiveCube = () => {
     const containerRef = useRef(null);
@@ -19,7 +20,7 @@ const InteractiveCube = () => {
         mouseY: 0,
         distanceX: 0,
         distanceY: 0,
-        positionX: 1122, // Starting X rotation (matches reference)
+        positionX: 1122, // Starting X rotation
         positionY: 136,  // Starting Y rotation
         torqueX: 0,
         torqueY: 0,
@@ -28,15 +29,13 @@ const InteractiveCube = () => {
         calculatedSide: 0
     });
 
-    // Face definitions corresponding to the original numbers in reference:
-    // 1: Top, 6: Bottom, 2: Front, 3: Right, 4: Back, 5: Left
     const faceData = [
-        { id: 2, label: 'Provisent', transform: 'translateZ(150px)', image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=600&auto=format&fit=crop' },
-        { id: 4, label: 'Learn', transform: 'rotateY(180deg) translateZ(150px)', image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=600&auto=format&fit=crop' },
-        { id: 3, label: 'Build', transform: 'rotateY(90deg) translateZ(150px)', image: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=600&auto=format&fit=crop' },
-        { id: 5, label: 'Scale', transform: 'rotateY(-90deg) translateZ(150px)', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop' },
-        { id: 1, label: 'Innovate', transform: 'rotateX(90deg) translateZ(150px)', image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=600&auto=format&fit=crop' },
-        { id: 6, label: 'Lead', transform: 'rotateX(-90deg) translateZ(150px)', image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=600&auto=format&fit=crop' },
+        { id: 2, label: 'Learn', icon: <Lightbulb size={48} />, gradient: 'from-cyan-500/80 to-blue-600/80', transform: 'translateZ(150px)' },
+        { id: 4, label: 'Build', icon: <Zap size={48} />, gradient: 'from-purple-500/80 to-purple-800/80', transform: 'rotateY(180deg) translateZ(150px)' },
+        { id: 3, label: 'Scale', icon: <Rocket size={48} />, gradient: 'from-pink-500/80 to-rose-600/80', transform: 'rotateY(90deg) translateZ(150px)' },
+        { id: 5, label: 'Lead', icon: <Target size={48} />, gradient: 'from-emerald-400/80 to-emerald-700/80', transform: 'rotateY(-90deg) translateZ(150px)' },
+        { id: 1, label: 'Innovate', icon: <Globe size={48} />, gradient: 'from-orange-400/80 to-red-600/80', transform: 'rotateX(90deg) translateZ(150px)' },
+        { id: 6, label: 'Protect', icon: <Shield size={48} />, gradient: 'from-indigo-500/80 to-blue-800/80', transform: 'rotateX(-90deg) translateZ(150px)' },
     ];
 
     const [activeSide, setActiveSide] = useState(0);
@@ -89,7 +88,6 @@ const InteractiveCube = () => {
                     s.positionX += 360;
                 }
 
-                // Determine Active Side (Reference Logic)
                 if (!(s.positionY >= 46 && s.positionY <= 130) && !(s.positionY >= 220 && s.positionY <= 308)) {
                     if (s.upsideDown) {
                         if (s.positionX >= 42 && s.positionX <= 130) { s.calculatedSide = 3; }
@@ -112,12 +110,10 @@ const InteractiveCube = () => {
                     setActiveSide(s.calculatedSide);
                 }
             } else if (!s.down) {
-                // Auto rotate when idle to keep it alive
                 s.positionX += 0.5;
                 if (s.positionX > 360) s.positionX -= 360;
             }
 
-            // Apply transforms
             if (cubeRef.current) {
                 cubeRef.current.style.transform = `rotateX(${s.positionY}deg) rotateY(${s.positionX}deg)`;
             }
@@ -132,14 +128,13 @@ const InteractiveCube = () => {
         };
     }, []);
 
-    // Event Handlers
     const handlePointerDown = (e) => {
         state.current.down = true;
         state.current.mouseX = e.clientX || e.touches[0].clientX / touchSensivity;
         state.current.mouseY = e.clientY || e.touches[0].clientY / touchSensivity;
         state.current.lastX = state.current.mouseX;
         state.current.lastY = state.current.mouseY;
-        document.body.style.userSelect = 'none'; // Prevent text selection on drag
+        document.body.style.userSelect = 'none';
     };
 
     const handlePointerMove = (e) => {
@@ -168,8 +163,7 @@ const InteractiveCube = () => {
     }, []);
 
     return (
-        <div className="relative w-full h-[500px] flex items-center justify-center pointer-events-auto" style={{ perspective: '1200px' }}>
-            {/* Draggable Layer Overlay */}
+        <div className="relative w-full h-[500px] flex items-center justify-center pointer-events-auto mt-16" style={{ perspective: '1200px' }}>
             <div
                 ref={containerRef}
                 className="absolute inset-0 z-50 cursor-grab active:cursor-grabbing touch-none"
@@ -177,12 +171,11 @@ const InteractiveCube = () => {
                 onTouchStart={handlePointerDown}
             ></div>
 
-            {/* Glowing Orb */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-cyan-500/20 rounded-full blur-[80px] pointer-events-none transition-all duration-500"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-r from-purple-500/30 to-cyan-500/30 rounded-full blur-[80px] pointer-events-none transition-all duration-500"></div>
 
             <div
                 ref={cubeRef}
-                className="relative w-[300px] h-[300px] transition-transform duration-75 ease-linear pointer-events-none"
+                className="relative w-[240px] h-[240px] md:w-[300px] md:h-[300px] transition-transform duration-75 ease-linear pointer-events-none"
                 style={{ transformStyle: 'preserve-3d', transform: 'rotateX(136deg) rotateY(1122deg)' }}
             >
                 {faceData.map((face, index) => {
@@ -190,32 +183,26 @@ const InteractiveCube = () => {
                     return (
                         <div
                             key={index}
-                            className={`absolute inset-0 flex items-center justify-center font-black text-3xl uppercase tracking-widest text-center transition-all duration-700 overflow-hidden
-                                border-2 
-                                ${isActive ? 'border-cyan-400 text-cyan-400 shadow-[0_0_50px_rgba(34,211,238,0.5)]' : 'border-white/10 text-white/80'}
+                            className={`absolute inset-0 flex flex-col items-center justify-center font-black text-2xl uppercase tracking-widest text-center transition-all duration-700 overflow-hidden
+                                border rounded-[2.5rem] backdrop-blur-md
+                                ${isActive ? 'border-white/50 text-white shadow-[0_0_50px_rgba(255,255,255,0.2)] bg-gradient-to-br ' + face.gradient : 'border-white/10 text-white/50 bg-black/40'}
                             `}
                             style={{
                                 transform: face.transform,
                                 backfaceVisibility: 'hidden',
                             }}
                         >
-                            {/* Background Image Layer */}
-                            <img
-                                src={face.image}
-                                alt={face.label}
-                                className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-out z-0
-                                    ${isActive ? 'opacity-70 scale-110 filter transform-gpu' : 'opacity-30 grayscale filter transform-gpu'}
-                                `}
-                            />
+                            {/* Animated Background Ring */}
+                            <div className={`absolute inset-0 m-auto w-[150%] h-[150%] rounded-full border border-white/5 pointer-events-none transition-all duration-1000
+                                ${isActive ? 'animate-[spin_10s_linear_infinite] scale-100 opacity-100 border-white/20' : 'scale-50 opacity-0'}
+                            `}></div>
 
-                            {/* Gradient Overlay for Text Readability */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20 z-0"></div>
-
-                            {/* Inner ring for aesthetic */}
-                            <div className={`absolute inset-4 border border-dashed transition-colors duration-700 rounded-full flex items-center justify-center z-10 
-                                ${isActive ? 'border-cyan-400/50 animate-[spin_20s_linear_infinite]' : 'border-white/20'}`}>
+                            {/* Icon Container */}
+                            <div className={`mb-4 transition-all duration-500 ${isActive ? 'scale-110 drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]' : 'scale-90 opacity-40'}`}>
+                                {face.icon}
                             </div>
-                            <span className="relative z-20 drop-shadow-[0_5px_15px_rgba(0,0,0,1)]">{face.label}</span>
+
+                            <span className="relative z-20 drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]">{face.label}</span>
                         </div>
                     );
                 })}
