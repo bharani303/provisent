@@ -115,9 +115,9 @@ const Navbar = () => {
                 <div className="container mx-auto px-6 flex items-center justify-between">
                     <div
                         onClick={() => navigate('/')}
-                        className="text-2xl font-black text-foreground tracking-widest uppercase cursor-pointer"
+                        className="cursor-pointer flex items-center h-8 md:h-10 transition-transform hover:scale-105 duration-300"
                     >
-                        PROVISENT
+                        <img src="/logo.png" alt="Provisent Logo" className="h-full w-auto object-contain" />
                     </div>
 
                     <div className="hidden md:flex items-center space-x-10 text-sm font-bold text-foreground/80 uppercase tracking-widest">

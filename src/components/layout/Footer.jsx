@@ -7,7 +7,9 @@ const Footer = () => {
             <div className="container mx-auto px-6 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                     <div className="col-span-1 md:col-span-2">
-                        <h2 className="text-4xl font-black text-white uppercase tracking-tighter mb-4">Provisent</h2>
+                        <div className="flex items-center mb-6">
+                            <img src="/logo.png" alt="Provisent Logo" className="h-12 object-contain" />
+                        </div>
                         <p className="text-white/50 max-w-sm mb-6">
                             Engineering the next generation of immersive digital products. Bold. Cinematic. Unforgettable.
                         </p>
