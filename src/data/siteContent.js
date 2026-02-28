@@ -322,11 +322,11 @@ export const SITE_DATA = {
         }
     ],
     instructors: [
-        { name: "S.Prajan", role: "CEO & Founder", bio: "Visionary leader dedicated to transforming global education through innovation.", initial: "SP", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop", expertise: ["Strategy", "Leadership"] },
-        { name: "Janani K", role: "Full Stack Developer", bio: "Expert in building scalable web applications with modern frameworks.", initial: "JK", image: "https://images.unsplash.com/photo-1598550874175-4d0ef43ce418?q=80&w=600&auto=format&fit=crop", expertise: ["MERN Stack", "Next.js", "Cloud Architecture"] },
-        { name: "Sharan M", role: "Senior UI UX Designer", bio: "Creative design leader focused on intuitive and accessible user experiences.", initial: "SM", image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=600&auto=format&fit=crop", expertise: ["Design Systems", "Prototyping", "Figma", "User Research"] },
-        { name: "Aswin R", role: "Business Strategist", bio: "Driving growth and innovation through data-driven business strategies.", initial: "AR", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop", expertise: ["Strategic Planning", "Market Analysis", "Growth Hacking"] },
-        { name: "Lakshanaya KM", role: "Data Science Expert", bio: "Specialising in AI, Machine Learning, and predictive analytics models.", initial: "LK", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600&auto=format&fit=crop", expertise: ["Python", "Machine Learning"] }
+        { name: "Michael Chang", role: " Devloper", bio: "Visionary leader dedicated to transforming global education through innovation.", initial: "MC", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop", expertise: ["Strategy", "Leadership"] },
+        { name: "Sarah Chen", role: "Full Stack Developer", bio: "Expert in building scalable web applications with modern frameworks.", initial: "SC", image: "https://images.unsplash.com/photo-1598550874175-4d0ef43ce418?q=80&w=600&auto=format&fit=crop", expertise: ["MERN Stack", "Next.js", "Cloud Architecture"] },
+        { name: "David Miller", role: "Senior UI UX Designer", bio: "Creative design leader focused on intuitive and accessible user experiences.", initial: "DM", image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=600&auto=format&fit=crop", expertise: ["Design Systems", "Prototyping", "Figma", "User Research"] },
+        { name: "James Wilson", role: "Business Strategist", bio: "Driving growth and innovation through data-driven business strategies.", initial: "JW", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop", expertise: ["Strategic Planning", "Market Analysis", "Growth Hacking"] },
+        { name: "Elena Rodriguez", role: "Data Science Expert", bio: "Specialising in AI, Machine Learning, and predictive analytics models.", initial: "ER", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600&auto=format&fit=crop", expertise: ["Python", "Machine Learning"] }
     ],
     journey: [
         { year: "2018", event: "Founded Provisent to democratize education" },
