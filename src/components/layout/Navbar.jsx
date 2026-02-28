@@ -147,9 +147,10 @@ const Navbar = () => {
                         </button>
                         <button
                             onClick={() => navigate('/enroll')}
-                            className="px-6 py-2.5 rounded-full border border-border bg-foreground text-background text-sm font-bold uppercase tracking-wider hover:bg-transparent hover:text-foreground transition-all duration-300"
+                            className="relative group overflow-hidden px-6 py-2.5 rounded-full border border-border bg-foreground text-background text-sm font-bold uppercase tracking-wider transition-all duration-300"
                         >
-                            Enroll Now
+                            <span className="relative z-10 group-hover:text-white transition-colors duration-300">Enroll Now</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
                         </button>
                     </div>
 
@@ -188,9 +189,10 @@ const Navbar = () => {
                             navigate('/enroll');
                             handleLinkClick();
                         }}
-                        className="mobile-link mt-8 px-10 py-4 rounded-full border-2 border-foreground bg-foreground text-background text-lg font-black uppercase tracking-widest"
+                        className="mobile-link mt-8 px-10 py-4 rounded-full border-2 border-foreground bg-foreground text-background text-lg font-black uppercase tracking-widest relative group overflow-hidden"
                     >
-                        Enroll Now
+                        <span className="relative z-10 group-hover:text-white transition-colors duration-300">Enroll Now</span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
                     </button>
                 </div>
             </div>
