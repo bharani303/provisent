@@ -8,10 +8,10 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                     <div className="col-span-1 md:col-span-2">
                         <div className="flex items-center mb-6">
-                            <img src="/logo.png" alt="Provisent Logo" className="h-24 md:h-32 object-contain origin-left" />
+                            <img src="/logo-dark.png" alt="Provisent Logo" className="h-24 md:h-32 object-contain origin-left" />
                         </div>
                         <p className="text-white/50 max-w-sm mb-6 mt-4">
-                            Engineering the next generation of immersive digital products. Bold. Cinematic. Unforgettable.
+                            Empowering learners worldwide with premium, world-class education and professional development.
                         </p>
                         <div className="flex space-x-4">
                             {['Twitter', 'LinkedIn', 'Instagram', 'Dribbble'].map((social) => (
@@ -45,14 +45,9 @@ const Footer = () => {
                 <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10">
                     <p className="text-white/30 text-sm">© {new Date().getFullYear()} Provisent. All rights reserved.</p>
                     <p className="text-white/30 text-sm mt-2 md:mt-0 flex items-center gap-2">
-                        Designed with <span className="text-pink-500 animate-pulse">♥</span> for the bold.
+                        Designed with <span className="text-pink-500 animate-pulse">♥ by Provisent</span>
                     </p>
                 </div>
-            </div>
-
-            {/* Huge background text */}
-            <div className="absolute bottom-[-100px] left-1/2 -translate-x-1/2 text-[15vw] font-black text-white/5 whitespace-nowrap pointer-events-none select-none uppercase tracking-tighter">
-                Provisent
             </div>
         </footer>
     );

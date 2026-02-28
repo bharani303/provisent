@@ -117,7 +117,11 @@ const Navbar = () => {
                         onClick={() => navigate('/')}
                         className="cursor-pointer flex items-center h-16 md:h-24 transition-transform hover:scale-105 duration-300 py-1"
                     >
-                        <img src="/logo.png" alt="Provisent Logo" className="h-full w-auto object-contain scale-125 md:scale-150 origin-left" />
+                        <img
+                            src={isDark ? "/logo-dark.png" : "/logo.png"}
+                            alt="Provisent Logo"
+                            className="h-full w-auto object-contain scale-125 md:scale-150 origin-left"
+                        />
                     </div>
 
                     <div className="hidden md:flex items-center space-x-10 text-sm font-bold text-foreground/80 uppercase tracking-widest">
