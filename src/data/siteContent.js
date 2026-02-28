@@ -7,9 +7,9 @@ export const SITE_DATA = {
         { title: "Contact", url: "/contact" }
     ],
     hero: {
-        title: "Transform Skills, Build Careers",
-        subtitle: "Join 50,000+ students learning professional skills with Provisent. Join thousands of students transforming their careers with Provisent EduTech.",
-        badge: "50,000+ Students Transformed Worldwide"
+        title: "Build Your Future",
+        subtitle: "Join 50k+ students mastering professional skills. Join thousands of students transforming their careers with Provisent EduTech.",
+        badge: "50,000+ Students Transformed"
     },
     courses: [
         // Programming
@@ -322,34 +322,96 @@ export const SITE_DATA = {
         }
     ],
     instructors: [
-        { name: "S.Prajan", role: "CEO & Founder", bio: "Experienced professional dedicated to your success.", initial: "S", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop" },
-        { name: "Aswathi S", role: "HR Manager", bio: "Experienced professional dedicated to your success.", initial: "A", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop" },
-        { name: "Nawin Kumar S", role: "Head of Operation", bio: "Experienced professional dedicated to your success.", initial: "N", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=600&auto=format&fit=crop" },
-        { name: "Saranya S", role: "Board of Director", bio: "Experienced professional dedicated to your success.", initial: "S", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600&auto=format&fit=crop" },
-        { name: "Suresh Kumar D", role: "Investor", bio: "Experienced professional dedicated to your success.", initial: "S", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop" },
-        { name: "Janani K", role: "Full stack developer", bio: "Experienced professional dedicated to your success.", initial: "J", image: "https://images.unsplash.com/photo-1598550874175-4d0ef43ce418?q=80&w=600&auto=format&fit=crop" },
-        { name: "Sharan M", role: "Senior UI UX designer", bio: "Experienced professional dedicated to your success.", initial: "S", image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=600&auto=format&fit=crop" },
-        { name: "Aswin R", role: "Business strategist", bio: "Experienced professional dedicated to your success.", initial: "A", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop" },
-        { name: "Lakshanaya KM", role: "Data science Expert", bio: "Experienced professional dedicated to your success.", initial: "L", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600&auto=format&fit=crop" }
+        { name: "S.Prajan", role: "CEO & Founder", bio: "Visionary leader dedicated to transforming global education through innovation.", initial: "SP", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop", expertise: ["Strategy", "Leadership"] },
+        { name: "Janani K", role: "Full Stack Developer", bio: "Expert in building scalable web applications with modern frameworks.", initial: "JK", image: "https://images.unsplash.com/photo-1598550874175-4d0ef43ce418?q=80&w=600&auto=format&fit=crop", expertise: ["MERN Stack", "Next.js", "Cloud Architecture"] },
+        { name: "Sharan M", role: "Senior UI UX Designer", bio: "Creative design leader focused on intuitive and accessible user experiences.", initial: "SM", image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=600&auto=format&fit=crop", expertise: ["Design Systems", "Prototyping", "Figma", "User Research"] },
+        { name: "Aswin R", role: "Business Strategist", bio: "Driving growth and innovation through data-driven business strategies.", initial: "AR", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop", expertise: ["Strategic Planning", "Market Analysis", "Growth Hacking"] },
+        { name: "Lakshanaya KM", role: "Data Science Expert", bio: "Specialising in AI, Machine Learning, and predictive analytics models.", initial: "LK", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600&auto=format&fit=crop", expertise: ["Python", "Machine Learning"] }
     ],
     journey: [
-        { year: "2018", event: "Founded Provisent EduTech with a vision to democratize education" },
-        { year: "2019", event: "Launched 50+ comprehensive programs across multiple domains" },
-        { year: "2020", event: "Reached 100K+ students globally during rapid growth phase" },
-        { year: "2021", event: "Introduced AI-powered learning paths and personalization" },
-        { year: "2022", event: "Expanded to 500K+ active learners across 120+ countries" },
-        { year: "2024", event: "Became industry leader in affordable quality education" }
+        { year: "2018", event: "Founded Provisent to democratize education" },
+        { year: "2019", event: "Launched 50+ programs in multiple domains" },
+        { year: "2020", event: "Reached 100K+ students globally" },
+        { year: "2021", event: "AI-powered learning and personalization" },
+        { year: "2022", event: "500K+ learners across 120+ countries" },
+        { year: "2024", event: "Leader in affordable quality education" }
     ],
     whyChooseUs: [
-        { title: "Expert-Led", desc: "Courses designed and taught by industry professionals." },
-        { title: "Affordable", desc: "Quality education without breaking the bank." },
-        { title: "Lifetime Access", desc: "Learn at your own pace with lifetime course content access." },
-        { title: "Certifications", desc: "Earn globally recognized certificates to advance your career." }
+        { title: "Expert Instructors", desc: "Learn from industry professionals with real-world experience." },
+        { title: "Live Sessions", desc: "Interactive Q&A and hands-on practice in real-time." },
+        { title: "Global Network", desc: "Connect with learners from 150+ countries worldwide." },
+        { title: "Certified Status", desc: "Earn credentials recognized by leading global companies." }
+    ],
+    testimonials: [
+        {
+            name: "Alexander Chen",
+            role: "Senior Data Scientist @ Meta",
+            content: "Provisent's curriculum is lightyears ahead. The practical approach to AI helped me solve complex problems.",
+            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800",
+            location: "San Francisco, USA"
+        },
+        {
+            name: "Sarah Jenkins",
+            role: "Product Designer @ Figma",
+            content: "World-class mentorship. Moving to UI/UX was seamless thanks to instructors working in the industry.",
+            image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800",
+            location: "London, UK"
+        },
+        {
+            name: "Rahul Sharma",
+            role: "Full Stack Developer @ Zomato",
+            content: "From zero coding to building MERN apps. Provisent gave me a portfolio recruiters couldn't ignore.",
+            image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800",
+            location: "Bangalore, India"
+        },
+        {
+            name: "Elena Rodriguez",
+            role: "Cybersecurity Analyst",
+            content: "Intense and rewarding Ethical Hacking program. State-of-the-art labs simulate real-world attacks.",
+            image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800",
+            location: "Madrid, Spain"
+        },
+        {
+            name: "David Kim",
+            role: "Cloud Architect @ Samsung",
+            content: "AWS specialization prepared me to lead my firm's cloud transition. Excellent instructors.",
+            image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=800",
+            location: "Seoul, South Korea"
+        },
+        {
+            name: "Sophie Dubois",
+            role: "Marketing Director @ L'Oréal",
+            content: "Revolutionary marketing strategies. Our ROI increased by 40% after implementing their methods.",
+            image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=800",
+            location: "Paris, France"
+        }
     ],
     contact: {
         email: "hr@provisent.com",
         phone: "+91 9361444644",
         address: "Global Headquarters, India",
         whatsapp: "https://wa.me/919361444644"
-    }
+    },
+    faqs: [
+        {
+            question: "How do I enroll?",
+            answer: "Click 'Enroll Now' on any program page. Complete registration and payment for immediate access."
+        },
+        {
+            question: "Globally recognized?",
+            answer: "Yes! Our certifications are recognized worldwide. Alumni work at Meta, Google, and Samsung."
+        },
+        {
+            question: "Lifetime access?",
+            answer: "Absolutely. You get lifetime access to all course materials and future updates."
+        },
+        {
+            question: "Placement help?",
+            answer: "Our career team provides resume building and direct connections to 200+ global hiring partners."
+        },
+        {
+            question: "Missed a session?",
+            answer: "All sessions are recorded in HD and uploaded within 24 hours to your student portal."
+        }
+    ]
 };

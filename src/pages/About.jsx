@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import InteractiveCube from '../components/animations/InteractiveCube';
 import CardStack from '../components/animations/CardStack';
-import { CheckCircle2, ChevronRight, Globe, Users, Award, Target, BookOpen, Lightbulb, Heart, Shield, GraduationCap, DollarSign, Clock, Briefcase } from 'lucide-react';
+import { CheckCircle2, ChevronRight, Globe, Users, Award, Target, BookOpen, Lightbulb, Heart, Shield, GraduationCap, DollarSign, Clock, Briefcase, Video } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -112,13 +112,12 @@ const About = () => {
         { icon: <Globe className="w-8 h-8 text-cyan-500" />, title: "Accessibility", desc: "Quality education available to everyone, everywhere" }
     ];
 
-    const whyChooseUs = [
-        { icon: <DollarSign className="w-6 h-6 text-green-500" />, title: "Affordable Pricing", desc: "Quality education without breaking the bank" },
-        { icon: <Clock className="w-6 h-6 text-purple-500" />, title: "Lifetime Access", desc: "Learn at your own pace with lifetime course access" },
-        { icon: <Users className="w-6 h-6 text-pink-500" />, title: "Expert Instructors", desc: "Learn from industry professionals and thought leaders" },
-        { icon: <Briefcase className="w-6 h-6 text-cyan-500" />, title: "Job Ready Skills", desc: "Practical skills demanded by top employers" },
-        { icon: <Globe className="w-6 h-6 text-indigo-500" />, title: "Global Community", desc: "Connect with learners from around the world" },
-        { icon: <Shield className="w-6 h-6 text-yellow-500" />, title: "Certifications", desc: "Earn recognized certificates to advance your career" }
+    const whyChooseUsData = SITE_DATA.whyChooseUs;
+    const whyChooseUsIcons = [
+        <Users className="w-6 h-6 text-pink-500" />,
+        <Video className="w-6 h-6 text-purple-500" />,
+        <Globe className="w-6 h-6 text-indigo-500" />,
+        <Shield className="w-6 h-6 text-yellow-500" />
     ];
 
     return (
@@ -285,10 +284,10 @@ const About = () => {
                             </a>
                         </div>
                         <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6 stagger-group w-full">
-                            {whyChooseUs.map((feature, i) => (
+                            {whyChooseUsData.map((feature, i) => (
                                 <div key={i} className="flex gap-6 p-6 rounded-2xl border border-border bg-card-bg hover:bg-white/5 dark:hover:bg-white/5 transition-colors">
                                     <div className="flex-shrink-0 w-12 h-12 bg-background border border-border rounded-xl flex items-center justify-center shadow-sm">
-                                        {feature.icon}
+                                        {whyChooseUsIcons[i]}
                                     </div>
                                     <div>
                                         <h4 className="text-lg font-bold uppercase tracking-tight text-foreground mb-2">{feature.title}</h4>

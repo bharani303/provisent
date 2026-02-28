@@ -41,7 +41,7 @@ const Hero = () => {
             <div className="container relative z-10 px-6 mx-auto flex flex-col items-center justify-center text-center mt-20 pointer-events-auto">
 
                 {/* Top Badge */}
-                <div className="hero-text-fade inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card-bg backdrop-blur-glass shadow-premium mb-8">
+                <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card-bg backdrop-blur-glass shadow-premium mb-8">
                     <Sparkles className="w-4 h-4 text-cyan-500" />
                     <span className="text-sm font-bold tracking-wide text-foreground/80 uppercase">
                         {SITE_DATA.hero.badge}
@@ -49,14 +49,14 @@ const Hero = () => {
                 </div>
 
                 {/* Title */}
-                <h1 className="text-5xl md:text-7xl lg:text-9xl font-black tracking-tighter text-foreground mb-6 uppercase leading-[0.85] overflow-hidden">
+                <h1 className="text-4xl md:text-7xl lg:text-9xl font-black tracking-tighter text-foreground mb-4 md:mb-6 uppercase leading-[0.85] overflow-hidden">
                     <div className="overflow-hidden inline-block px-1">
                         <span className="hero-text-fade block bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground/80 to-foreground/40 dark:from-white dark:via-white/80 dark:to-white/40">
                             Transform
                         </span>
                     </div>
                     <br />
-                    <div className="overflow-hidden inline-block pb-2 px-1">
+                    <div className="overflow-hidden inline-block pb-1 md:pb-2 px-1">
                         <span className="hero-text-fade block text-gradient text-transparent bg-clip-text">
                             Your Skills
                         </span>
@@ -95,14 +95,18 @@ const Hero = () => {
                 </div>
 
                 {/* Actions */}
-                <div className="hero-cta flex flex-wrap items-center justify-center gap-6">
-                    <MagneticButton primary>
-                        View Programs
-                    </MagneticButton>
-                    <MagneticButton onClick={() => window.open(SITE_DATA.contact.whatsapp, '_blank')}>
-                        Contact Us
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                    </MagneticButton>
+                <div className="flex flex-wrap items-center justify-center gap-6">
+                    <div className="hero-cta-item">
+                        <MagneticButton primary>
+                            View Programs
+                        </MagneticButton>
+                    </div>
+                    <div className="hero-cta-item">
+                        <MagneticButton onClick={() => window.open(SITE_DATA.contact.whatsapp, '_blank')}>
+                            Contact Us
+                            <ArrowRight className="w-4 h-4 ml-2" />
+                        </MagneticButton>
+                    </div>
                 </div>
 
             </div>

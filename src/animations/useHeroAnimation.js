@@ -15,32 +15,47 @@ export const useHeroAnimation = () => {
                 repeatDelay: 5
             });
 
+            // Top Badge Entrance
+            gsap.from(".hero-badge", {
+                y: -50,
+                opacity: 0,
+                scale: 0.5,
+                duration: 1.5,
+                ease: "elastic.out(1, 0.5)",
+                delay: 0.2
+            });
+
             // Text reveal
             gsap.from(".hero-text-fade", {
-                y: 100,
+                y: 120,
+                rotationX: -45,
                 opacity: 0,
-                stagger: 0.1,
-                duration: 1.5,
+                transformOrigin: "0% 50% -50",
+                stagger: 0.15,
+                duration: 1.8,
                 ease: "power4.out",
-                delay: 0.5
+                delay: 0.4
             });
 
             // Subtitle fade
             gsap.from(".hero-subtitle", {
                 opacity: 0,
-                y: 20,
-                duration: 1,
-                delay: 1.5,
-                ease: "power2.out"
+                y: 30,
+                scale: 0.95,
+                duration: 1.5,
+                delay: 1.2,
+                ease: "power3.out"
             });
 
             // CTA fade
-            gsap.from(".hero-cta", {
+            gsap.from(".hero-cta-item", {
                 opacity: 0,
+                y: 30,
                 scale: 0.9,
-                duration: 1,
-                delay: 2,
-                ease: "back.out(1.7)"
+                stagger: 0.1,
+                duration: 1.2,
+                delay: 1.5,
+                ease: "back.out(1.5)"
             });
 
             // Number Counter Animation
@@ -48,6 +63,15 @@ export const useHeroAnimation = () => {
             counters.forEach(counter => {
                 const target = parseFloat(counter.getAttribute('data-target'));
                 const suffix = counter.getAttribute('data-suffix') || '';
+
+                // Counter entrance
+                gsap.from(counter.parentElement, {
+                    opacity: 0,
+                    y: 20,
+                    duration: 1,
+                    delay: 1.8,
+                    ease: "power2.out"
+                });
 
                 // Animate from 0 to target
                 gsap.fromTo(counter,
