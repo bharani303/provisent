@@ -8,9 +8,9 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                     <div className="col-span-1 md:col-span-2">
                         <div className="flex items-center mb-6">
-                            <img src="/logo.png" alt="Provisent Logo" className="h-12 object-contain" />
+                            <img src="/logo.png" alt="Provisent Logo" className="h-24 md:h-32 object-contain origin-left" />
                         </div>
-                        <p className="text-white/50 max-w-sm mb-6">
+                        <p className="text-white/50 max-w-sm mb-6 mt-4">
                             Engineering the next generation of immersive digital products. Bold. Cinematic. Unforgettable.
                         </p>
                         <div className="flex space-x-4">

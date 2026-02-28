@@ -15,20 +15,17 @@ const CertPreview = () => {
             ref={ref}
             onMouseMove={onMouseMove}
             onMouseLeave={onMouseLeave}
-            className="w-full lg:w-1/2 cert-preview aspect-video bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 rounded-[2rem] border border-white/10 shadow-2xl flex items-center justify-center p-8 lg:p-12 hover:shadow-[0_0_50px_rgba(34,211,238,0.2)] transition-shadow duration-700 z-10 hover:z-20"
+            className="w-full lg:w-1/2 cert-preview aspect-video bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 rounded-[2rem] border border-white/10 shadow-2xl flex items-center justify-center p-2 lg:p-4 hover:shadow-[0_0_50px_rgba(34,211,238,0.2)] transition-shadow duration-700 z-10 hover:z-20 cursor-pointer overflow-hidden"
         >
-            <div className="text-center p-8 border-4 border-double border-foreground/20 w-full h-full flex flex-col items-center justify-center bg-background/50 backdrop-blur-sm rounded-xl relative overflow-hidden">
-                <div className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-lg">
-                    <Award className="w-6 h-6 text-black" />
-                </div>
-                <h3 className="text-3xl font-black tracking-widest text-foreground/30 uppercase mb-4">Provisent</h3>
-                <h2 className="text-2xl font-bold tracking-widest uppercase mb-4 text-foreground/80">Certificate of Completion</h2>
-                <div className="w-16 h-1.5 mt-2 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500"></div>
-                <div className="mt-8 flex justify-between w-full px-8 opacity-50">
-                    <div className="w-20 h-1 bg-foreground/20 rounded"></div>
-                    <div className="w-20 h-1 bg-foreground/20 rounded"></div>
-                </div>
-            </div>
+            <img
+                src="/certificate.png"
+                alt="Provisent Certificate Example"
+                className="w-full h-full object-cover rounded-xl shadow-inner"
+                onError={(e) => {
+                    // Fallback to a placeholder if image is missing
+                    e.target.src = "https://images.unsplash.com/photo-1589330694653-ded6df03f754?q=80&w=1000&auto=format&fit=crop";
+                }}
+            />
         </div>
     );
 };
