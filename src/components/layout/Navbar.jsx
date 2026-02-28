@@ -130,11 +130,13 @@ const Navbar = () => {
                                 key={item.title}
                                 to={item.url}
                                 className={({ isActive }) =>
-                                    `relative group overflow-hidden ${isActive ? 'text-foreground' : 'hover:text-foreground transition-colors'}`
+                                    `relative group overflow-hidden ${isActive ? 'text-foreground' : 'transition-colors'}`
                                 }
                             >
-                                {item.title}
-                                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-foreground transform -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
+                                <span className="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:via-purple-500 group-hover:to-pink-500 transition-all duration-300">
+                                    {item.title}
+                                </span>
+                                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 transform -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-300 ease-out"></span>
                             </NavLink>
                         ))}
                     </div>

@@ -44,10 +44,13 @@ const Footer = () => {
 
                 <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10">
                     <p className="text-white/30 text-sm">© {new Date().getFullYear()} Provisent. All rights reserved.</p>
-                    <p className="text-white/30 text-sm mt-2 md:mt-0 flex items-center gap-2">
-                        Designed with <span className="text-pink-500 animate-pulse">♥ by Provisent</span>
-                    </p>
+                    
                 </div>
+            </div>
+
+            {/* Huge background text */}
+            <div className="absolute bottom-[-100px] left-1/2 -translate-x-1/2 text-[15vw] font-black text-white/5 whitespace-nowrap pointer-events-none select-none uppercase tracking-tighter">
+                Provisent
             </div>
         </footer>
     );
