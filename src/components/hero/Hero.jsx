@@ -6,15 +6,17 @@ import HeroScene from '../../three/HeroScene';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { SITE_DATA } from '../../data/siteContent';
 import FallingStarsBackground from '../animations/FallingStarsBackground';
+import useMobile from '../../hooks/useMobile';
 
 const Hero = () => {
     const heroRef = useHeroAnimation();
+    const isMobile = useMobile();
 
     return (
         <section
             ref={heroRef}
             className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background transition-colors duration-500 select-none pb-20"
-            onPointerMove={(e) => {
+            onPointerMove={isMobile ? undefined : (e) => {
                 const { currentTarget, clientX, clientY } = e;
                 const rect = currentTarget.getBoundingClientRect();
                 const x = clientX - rect.left;
@@ -45,11 +47,13 @@ const Hero = () => {
             </div>
 
             {/* 3D Background - Desktop Only */}
-            <div className="absolute inset-0 z-0 hero-bg-blur opacity-90 dark:opacity-90 pointer-events-auto transition-opacity duration-1000 hidden md:block">
-                <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
-                    <HeroScene />
-                </Canvas>
-            </div>
+            {!isMobile && (
+                <div className="absolute inset-0 z-0 hero-bg-blur opacity-90 dark:opacity-90 pointer-events-auto transition-opacity duration-1000 hidden md:block">
+                    <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
+                        <HeroScene />
+                    </Canvas>
+                </div>
+            )}
 
             {/* Content Container */}
             <div className="container relative z-10 px-6 mx-auto flex flex-col items-center justify-center text-center mt-12 md:mt-24 pointer-events-auto">
@@ -106,12 +110,14 @@ const Hero = () => {
                 </div>
             </div>
 
-            {/* Mouse Spotlight (Optimized for performance) */}
-            <div className="pointer-events-none absolute inset-0 z-20 opacity-30 dark:opacity-40"
-                style={{
-                    background: 'radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.2), transparent 45%)'
-                }}
-            />
+            {/* Mouse Spotlight (Optimized for performance - Desktop Only) */}
+            {!isMobile && (
+                <div className="pointer-events-none absolute inset-0 z-20 opacity-30 dark:opacity-40"
+                    style={{
+                        background: 'radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.2), transparent 45%)'
+                    }}
+                />
+            )}
 
             <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background via-background/60 to-transparent z-10 pointer-events-none"></div>
         </section>

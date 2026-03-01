@@ -18,6 +18,18 @@ const generateCourseDetails = (course) => {
             "Lifetime Access to Course Materials",
             "Mock Interviews and Resume Reviews"
         ],
+        whatYouWillLearn: [
+            "Build robust, production-ready applications from scratch",
+            "Master the modern tech stack and framework ecosystem",
+            "Understand core system design and architecture principles",
+            "Deploy, manage, and scale applications on Cloud platforms",
+            "Write clean, maintainable, and testable enterprise code",
+            "Ace technical interviews and coding rounds with confidence"
+        ],
+        certification: {
+            title: "Industry Recognized Certification",
+            desc: "Upon successful completion of all modules and projects, you will receive a verifiable certificate globally recognized by top tech companies."
+        },
         curriculum: [
             {
                 module: "Module 1: Foundations",
@@ -233,6 +245,23 @@ const CourseDetail = () => {
                                 </p>
                             </section>
 
+                            {/* What You Will Learn */}
+                            <section id="outcomes" className="bg-card-bg/40 border border-border rounded-3xl p-8">
+                                <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-8">
+                                    What You Will <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Learn</span>
+                                </h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-6">
+                                    {details.whatYouWillLearn.map((item, idx) => (
+                                        <div key={idx} className="flex items-start gap-3">
+                                            <div className="mt-1 bg-green-500/20 rounded-full p-1 shrink-0">
+                                                <CheckCircle className="w-4 h-4 text-green-400" />
+                                            </div>
+                                            <span className="font-medium text-foreground/80 leading-relaxed">{item}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+
                             {/* 3. Highlights */}
                             <section id="highlights">
                                 <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight mb-8 flex items-center gap-3">
@@ -383,6 +412,26 @@ const CourseDetail = () => {
                                             </div>
                                         ))}
                                     </div>
+                                </div>
+
+                                {/* 8. Certification Detail */}
+                                <div className="bg-gradient-to-br from-[#1a1c29] to-[#0f111a] border border-cyan-500/10 rounded-3xl p-8 text-center relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-yellow-500/10 via-transparent to-transparent pointer-events-none"></div>
+                                    <Award className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
+                                    <h3 className="text-xl font-black uppercase tracking-tight mb-3 text-white">
+                                        {details.certification.title}
+                                    </h3>
+                                    <p className="text-sm font-medium text-white/60 mb-6 leading-relaxed">
+                                        {details.certification.desc}
+                                    </p>
+                                    <img
+                                        src="/certificate-placeholder.png"
+                                        alt="Certificate Sample"
+                                        className="w-full aspect-[4/3] rounded-xl border border-white/10 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500 object-cover"
+                                        onError={(e) => {
+                                            e.target.src = "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop";
+                                        }}
+                                    />
                                 </div>
 
                             </div>

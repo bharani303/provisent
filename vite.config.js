@@ -11,4 +11,20 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    target: 'esnext',
+    cssMinify: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom', 'react-helmet-async'],
+          three: ['three', '@react-three/fiber', '@react-three/drei'],
+          anim: ['framer-motion', 'gsap']
+        }
+      }
+    }
+  },
+  esbuild: {
+    drop: ['console', 'debugger'],
+  }
 })

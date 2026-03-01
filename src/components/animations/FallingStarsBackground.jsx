@@ -63,6 +63,17 @@ const FallingStarsBackground = () => {
                     .meteor-3 { top: -50px; right: 20%; animation-delay: 8s; }
                     .meteor-4 { top: 10%; right: -50px; animation-delay: 8.6s; }
                     .meteor-5 { top: 20%; right: -150px; animation-delay: 9.2s; }
+
+                    /* Mobile Optimizations - 60fps Target */
+                    @media (max-width: 768px) {
+                        .meteor {
+                            box-shadow: 0 0 10px #fff; /* Reduce expensive blur shadows */
+                            animation: meteor 25s ease-in-out infinite; /* Slow down */
+                        }
+                        .meteor::after { width: 100px; filter: none; }
+                        /* Hide excess stars on mobile to save GPU layout */
+                        .meteor-3, .meteor-4, .meteor-5 { display: none; }
+                    }
                 `}
             </style>
             <div className="meteor meteor-1"></div>
