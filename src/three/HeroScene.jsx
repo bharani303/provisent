@@ -43,13 +43,12 @@ export default function HeroScene() {
         // 2. Interactive Twinkling & Brightening Stars
         if (starsRef.current) {
             // Base cinematic twinkle + bright surge when interacting
-            const baseTwinkle = 6 + Math.sin(time * 0.5) * 3; // Brighter idle state
-            const interactiveSurge = interactionFactor.current * 30; // Even more massive brightness boost
+            const baseTwinkle = 4 + Math.sin(time * 0.5) * 2;
+            const interactiveSurge = interactionFactor.current * 15;
 
+            // Update only if visible to avoid unnecessary GPU work
             starsRef.current.factor = baseTwinkle + interactiveSurge;
-
-            // Speed up the galaxy rotation slightly when interacting for 'warp' feel
-            starsRef.current.rotation.y = time * (0.02 + (interactionFactor.current * 0.08));
+            starsRef.current.rotation.y = time * (0.01 + (interactionFactor.current * 0.04));
         }
     });
 
@@ -73,57 +72,48 @@ export default function HeroScene() {
                 rotateSpeed={0.5}
             />
 
-            {/* Falling Stars Effect (Cinematic Sparkles - Bigger and Faster) */}
+            {/* Falling Stars Effect (Optimized Sparkles) */}
             <Sparkles
-                count={60}
+                count={40} // Reduced for performance
                 scale={[25, 25, 15]}
-                size={6}
-                speed={1.5}
-                opacity={0.4}
+                size={5}
+                speed={1.2}
+                opacity={0.3}
                 color="#06b6d4"
             />
-            <Sparkles
-                count={30}
-                scale={[35, 35, 20]}
-                size={10}
-                speed={2}
-                opacity={0.3}
-                color="#8B5CF6"
-            />
 
-            {/* 4K Cinematic Milky Way Effect */}
-            {/* The Galactic Core Glow */}
+            {/* Optimized Milky Way Core Glow (Merged into fewer systems) */}
             <Sparkles
-                count={300}
-                scale={[35, 12, 35]}
-                size={10}
-                speed={0.2}
-                opacity={isDark ? 0.3 : 0.4}
+                count={150} // Reduced significantly
+                scale={[35, 10, 35]}
+                size={8}
+                speed={0.15}
+                opacity={isDark ? 0.25 : 0.35}
                 color={isDark ? "#8B5CF6" : "#4f46e5"}
                 position={[-5, 2, -10]}
                 rotation={[0, 0, Math.PI / 4]}
             />
             <Sparkles
-                count={250}
-                scale={[45, 8, 45]}
-                size={15}
-                speed={0.15}
-                opacity={isDark ? 0.25 : 0.35}
+                count={120} // Reduced significantly
+                scale={[45, 6, 45]}
+                size={12}
+                speed={0.12}
+                opacity={isDark ? 0.2 : 0.3}
                 color={isDark ? "#06b6d4" : "#0284c7"}
                 position={[0, 0, -12]}
                 rotation={[0, 0, Math.PI / 4]}
             />
 
-            {/* Clean, High-End Starfield (Fewer but Better) */}
+            {/* Clean, High-End Starfield (Dramatically Reduced count for FPS) */}
             <Stars
                 ref={starsRef}
                 radius={130}
                 depth={70}
-                count={isDark ? 5000 : 7000}
-                factor={isDark ? 7 : 8}
-                saturation={isDark ? 0.4 : 1} // Higher saturation in light mode for "jewel" look
+                count={isDark ? 2500 : 3500} // Half of previous count
+                factor={6}
+                saturation={isDark ? 0.3 : 0.8}
                 fade
-                speed={1.2}
+                speed={1}
             />
 
             <Float

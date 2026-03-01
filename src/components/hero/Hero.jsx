@@ -96,14 +96,14 @@ const Hero = () => {
                 </div>
             </div>
 
-            {/* Mouse Spotlight */}
-            <div className="pointer-events-none absolute inset-0 z-20 opacity-40 dark:opacity-60 mix-blend-soft-light"
+            {/* Mouse Spotlight (Optimized for performance) */}
+            <div className="pointer-events-none absolute inset-0 z-20 opacity-30 dark:opacity-40"
                 style={{
-                    background: 'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.4), transparent 50%)'
+                    background: 'radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.2), transparent 45%)'
                 }}
             />
 
-            <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-background via-background/80 to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background via-background/60 to-transparent z-10 pointer-events-none"></div>
         </section>
     );
 };
