@@ -19,8 +19,6 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     const navRef = useRef(null);
-    const menuRef = useRef(null);
-    const tl = useRef(null);
 
     // Scroll detection
     useEffect(() => {
@@ -70,41 +68,10 @@ const Navbar = () => {
         return () => ctx.revert();
     }, []);
 
-    // GSAP Mobile Menu Animation (Side Drawer) - MORE ROBUST FOR MOBILE
-    useLayoutEffect(() => {
-        let ctx = gsap.context(() => {
-            tl.current = gsap.timeline({ paused: true })
-                .to(menuRef.current, {
-                    autoAlpha: 1,
-                    duration: 0.1,
-                    pointerEvents: "auto"
-                })
-                .from(".drawer-backdrop", {
-                    opacity: 0,
-                    duration: 0.4
-                }, 0)
-                .from(".drawer-panel", {
-                    x: "100%",
-                    duration: 0.6,
-                    ease: "power4.inOut"
-                }, 0)
-                .from(".mobile-link", {
-                    x: 50,
-                    opacity: 0,
-                    stagger: 0.08,
-                    duration: 0.5,
-                    ease: "power2.out"
-                }, "-=0.3");
-        });
-        return () => ctx.revert();
-    }, []);
-
     useEffect(() => {
         if (menuOpen) {
-            tl.current.play();
             document.body.style.overflow = 'hidden';
-        } else if (tl.current) {
-            tl.current.reverse();
+        } else {
             document.body.style.overflow = '';
         }
     }, [menuOpen]);
@@ -214,27 +181,32 @@ const Navbar = () => {
                 </div>
             </nav>
 
-            {/* Premium Mobile Side Navigation (Drawer) */}
+            {/* Premium Mobile Side Navigation (Pure CSS for Ultra Performance) */}
             <div
-                ref={menuRef}
-                className="fixed top-0 left-0 w-screen h-screen z-[9999] invisible pointer-events-none"
-                style={{ opacity: 0 }}
+                className={`fixed inset-0 z-[9999] transition-all duration-500 lg:hidden ${menuOpen ? 'visible pointer-events-auto' : 'invisible pointer-events-none'
+                    }`}
             >
                 {/* Backdrop Overlay */}
                 <div
-                    className="drawer-backdrop absolute inset-0 bg-black/60 backdrop-blur-md"
+                    className={`absolute inset-0 bg-black/60 backdrop-blur-md transition-opacity duration-500 ${menuOpen ? 'opacity-100' : 'opacity-0'
+                        }`}
                     onClick={() => setMenuOpen(false)}
                 ></div>
 
                 {/* The Side Drawer Panel */}
-                <div className="drawer-panel absolute top-0 right-0 w-[85%] max-w-[350px] h-full bg-background border-l border-border/50 shadow-2xl flex flex-col items-center justify-center">
+                <div
+                    className={`absolute top-0 right-0 w-[85%] max-w-[350px] h-full bg-background border-l border-border/50 shadow-2xl flex flex-col items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${menuOpen ? 'translate-x-0' : 'translate-x-full'
+                        }`}
+                >
                     <div className="flex flex-col items-center space-y-6 w-full px-4">
-                        {navLinks.map((item) => (
+                        {navLinks.map((item, index) => (
                             <NavLink
                                 key={item.title}
                                 to={item.url}
                                 onClick={handleLinkClick}
-                                className="mobile-link text-2xl font-black text-foreground uppercase tracking-widest hover:text-cyan-500 transition-colors w-full text-center py-3"
+                                className={`text-2xl font-black text-foreground uppercase tracking-widest hover:text-cyan-500 transition-all duration-500 transform w-full text-center py-3 ${menuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+                                    }`}
+                                style={{ transitionDelay: `${menuOpen ? 150 + index * 60 : 0}ms` }}
                             >
                                 {item.title}
                             </NavLink>
@@ -244,7 +216,9 @@ const Navbar = () => {
                                 navigate('/enroll');
                                 handleLinkClick();
                             }}
-                            className="mobile-link mt-2 w-full py-4 rounded-full border-2 border-foreground bg-foreground text-background text-base font-black uppercase tracking-widest relative group overflow-hidden"
+                            className={`mt-2 w-full py-4 rounded-full border-2 border-foreground bg-foreground text-background text-base font-black uppercase tracking-widest relative group overflow-hidden transition-all duration-500 transform ${menuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+                                }`}
+                            style={{ transitionDelay: `${menuOpen ? 150 + navLinks.length * 60 : 0}ms` }}
                         >
                             <span className="relative z-10 group-hover:text-white transition-colors duration-300 px-6 whitespace-nowrap">Enroll Now</span>
                             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
