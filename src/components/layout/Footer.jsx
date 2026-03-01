@@ -8,7 +8,7 @@ const Footer = () => {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                     <div className="col-span-1 md:col-span-2">
                         <div className="flex items-center mb-6">
-                            <img src="/logo-dark.png" alt="Provisent Logo" className="h-24 md:h-32 object-contain origin-left" />
+                            <img src="/logo-dark.png" alt="Provisent Logo" className="h-24 md:h-32 object-contain origin-left scale-110" />
                         </div>
                         <p className="text-white/50 max-w-sm mb-6 mt-4">
                             Empowering learners worldwide with premium, world-class education and professional development.
@@ -44,7 +44,7 @@ const Footer = () => {
 
                 <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10">
                     <p className="text-white/30 text-sm">© {new Date().getFullYear()} Provisent. All rights reserved.</p>
-                    
+
                 </div>
             </div>
 

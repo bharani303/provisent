@@ -5,17 +5,10 @@ export const useHeroAnimation = () => {
     const heroRef = useRef(null);
 
     useEffect(() => {
-        let ctx = gsap.context(() => {
-            // Light sweep effect
-            gsap.to(".light-sweep", {
-                x: "150%",
-                duration: 2,
-                ease: "power2.inOut",
-                repeat: -1,
-                repeatDelay: 5
-            });
+        let mm = gsap.matchMedia();
 
-            // Top Badge Entrance
+        mm.add("(min-width: 768px)", () => {
+            // Desktop Animations
             gsap.from(".hero-badge", {
                 y: -50,
                 opacity: 0,
@@ -25,7 +18,6 @@ export const useHeroAnimation = () => {
                 delay: 0.2
             });
 
-            // Text reveal
             gsap.from(".hero-text-fade", {
                 y: 120,
                 rotationX: -45,
@@ -37,7 +29,6 @@ export const useHeroAnimation = () => {
                 delay: 0.4
             });
 
-            // Subtitle fade
             gsap.from(".hero-subtitle", {
                 opacity: 0,
                 y: 30,
@@ -47,7 +38,6 @@ export const useHeroAnimation = () => {
                 ease: "power3.out"
             });
 
-            // CTA fade
             gsap.from(".hero-cta-item", {
                 opacity: 0,
                 y: 30,
@@ -57,14 +47,61 @@ export const useHeroAnimation = () => {
                 delay: 1.5,
                 ease: "back.out(1.5)"
             });
+        });
 
-            // Number Counter Animation
+        mm.add("(max-width: 767px)", () => {
+            // Mobile Animations (Subtle & Clean)
+            gsap.from(".hero-badge", {
+                y: -20,
+                opacity: 0,
+                scale: 0.8,
+                duration: 1,
+                ease: "power3.out",
+                delay: 0.2
+            });
+
+            gsap.from(".hero-text-fade", {
+                y: 40,
+                opacity: 0,
+                stagger: 0.1,
+                duration: 1.2,
+                ease: "power4.out",
+                delay: 0.4
+            });
+
+            gsap.from(".hero-subtitle", {
+                opacity: 0,
+                y: 15,
+                duration: 1.2,
+                delay: 1,
+                ease: "power3.out"
+            });
+
+            gsap.from(".hero-cta-item", {
+                opacity: 0,
+                scale: 0.9,
+                stagger: 0.1,
+                duration: 1,
+                delay: 1.3,
+                ease: "power2.out"
+            });
+        });
+
+        let ctx = gsap.context(() => {
+            // Common Animations (Continuous & Counters)
+            gsap.to(".light-sweep", {
+                x: "150%",
+                duration: 2,
+                ease: "power2.inOut",
+                repeat: -1,
+                repeatDelay: 5
+            });
+
             const counters = gsap.utils.toArray(".stat-number");
             counters.forEach(counter => {
                 const target = parseFloat(counter.getAttribute('data-target'));
                 const suffix = counter.getAttribute('data-suffix') || '';
 
-                // Counter entrance
                 gsap.from(counter.parentElement, {
                     opacity: 0,
                     y: 20,
@@ -73,7 +110,6 @@ export const useHeroAnimation = () => {
                     ease: "power2.out"
                 });
 
-                // Animate from 0 to target
                 gsap.fromTo(counter,
                     { innerText: 0 },
                     {
@@ -81,23 +117,20 @@ export const useHeroAnimation = () => {
                         duration: 2,
                         delay: 2.2,
                         ease: "power2.out",
-                        snap: { innerText: 1 }, // ensure whole numbers
+                        snap: { innerText: 1 },
                         onUpdate: function () {
-                            // Add the suffix back during update (e.g. "K+" or "%")
                             counter.innerHTML = Math.ceil(this.targets()[0].innerText) + suffix;
                         }
                     }
                 );
             });
 
-            // Background Elements Fade
             gsap.from(".hero-bg-blur", {
                 opacity: 0,
                 duration: 3,
                 ease: "power2.out"
             });
 
-            // Organic Aurora Blobs Continuous Animation
             gsap.to(".organic-blob", {
                 x: "random(-100, 100)",
                 y: "random(-100, 100)",
@@ -123,9 +156,37 @@ export const useHeroAnimation = () => {
                 delay: -5
             });
 
+            // Falling Fire Stars Animation
+            const fireStars = gsap.utils.toArray(".falling-fire-star");
+            fireStars.forEach((star, i) => {
+                gsap.fromTo(star,
+                    {
+                        x: 0,
+                        y: 0,
+                        opacity: 0,
+                        scale: 0.5
+                    },
+                    {
+                        x: -window.innerWidth,
+                        y: window.innerHeight * 0.8,
+                        opacity: 1,
+                        scale: i === 1 ? 4 : 3, // Second one is even bigger
+                        duration: 1.8,
+                        delay: 2.5 + (i * 0.6), // Slightly more delay to see it clearly after landing
+                        ease: "power2.in",
+                        onComplete: () => {
+                            gsap.to(star, { opacity: 0, duration: 0.3 });
+                        }
+                    }
+                );
+            });
+
         }, heroRef);
 
-        return () => ctx.revert();
+        return () => {
+            ctx.revert();
+            mm.revert();
+        };
     }, []);
 
     return heroRef;

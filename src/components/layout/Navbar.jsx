@@ -15,6 +15,7 @@ const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [isDark, setIsDark] = useState(true);
+    const [isLogoHovered, setIsLogoHovered] = useState(false);
     const navigate = useNavigate();
 
     const navRef = useRef(null);
@@ -69,22 +70,22 @@ const Navbar = () => {
         return () => ctx.revert();
     }, []);
 
-    // GSAP Mobile Menu Animation
+    // GSAP Mobile Menu Animation (Side Drawer)
     useLayoutEffect(() => {
         let ctx = gsap.context(() => {
             tl.current = gsap.timeline({ paused: true })
                 .to(menuRef.current, {
-                    y: "0%",
+                    x: "0%",
                     duration: 0.6,
                     ease: "power4.inOut"
                 })
                 .from(".mobile-link", {
-                    y: 50,
+                    x: 50,
                     opacity: 0,
                     stagger: 0.1,
                     duration: 0.4,
                     ease: "power2.out"
-                }, "-=0.2");
+                }, "-=0.3");
         });
         return () => ctx.revert();
     }, []);
@@ -107,24 +108,36 @@ const Navbar = () => {
         <>
             <nav
                 ref={navRef}
-                className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled
-                    ? 'py-4 bg-card-bg backdrop-blur-glass border-b border-border shadow-premium'
-                    : 'py-6 bg-transparent'
+                className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled
+                    ? 'py-2 bg-card-bg/80 backdrop-blur-xl border-b border-border/50 shadow-premium'
+                    : 'py-4 bg-transparent'
                     }`}
             >
                 <div className="container mx-auto px-6 flex items-center justify-between">
                     <div
                         onClick={() => navigate('/')}
-                        className="cursor-pointer flex items-center h-16 md:h-24 transition-transform hover:scale-105 duration-300 py-1"
+                        onMouseEnter={() => setIsLogoHovered(true)}
+                        onMouseLeave={() => setIsLogoHovered(false)}
+                        className={`cursor-pointer relative flex items-center transition-all duration-500 py-1 ${scrolled ? 'h-12 md:h-14' : 'h-16 md:h-24'
+                            } hover:scale-110`}
                     >
+                        {/* Light Logo (logo.png) - This one defines the container's width */}
                         <img
-                            src={isDark ? "/logo-dark.png" : "/logo.png"}
+                            src="/logo.png"
                             alt="Provisent Logo"
-                            className="h-full w-auto object-contain scale-125 md:scale-150 origin-left"
+                            className={`h-full w-auto object-contain origin-left transition-all duration-500 ${isLogoHovered || !isDark ? 'opacity-100' : 'opacity-0'
+                                }`}
+                        />
+                        {/* Dark Logo (logo-dark.png) - This one overlays the light one exactly */}
+                        <img
+                            src="/logo-dark.png"
+                            alt="Provisent Logo"
+                            className={`absolute right-4 h-full w-auto object-contain origin-left transition-all duration-500 scale-135 ${!isLogoHovered && isDark ? 'opacity-100' : 'opacity-0'
+                                }`}
                         />
                     </div>
 
-                    <div className="hidden md:flex items-center space-x-10 text-sm font-bold text-foreground/80 uppercase tracking-widest">
+                    <div className={`hidden md:flex items-center transition-all duration-500 ${scrolled ? 'space-x-6' : 'space-x-10'} text-sm font-bold text-foreground/80 uppercase tracking-widest`}>
                         {navLinks.map((item) => (
                             <NavLink
                                 key={item.title}
@@ -141,13 +154,30 @@ const Navbar = () => {
                         ))}
                     </div>
 
-                    <div className="hidden md:flex items-center space-x-6">
-                        <button onClick={toggleTheme} className="text-foreground hover:scale-110 transition-transform">
-                            {isDark ? <Sun size={20} /> : <Moon size={20} />}
+                    <div className={`hidden md:flex items-center transition-all duration-500 ${scrolled ? 'space-x-4' : 'space-x-6'}`}>
+                        {/* Premium Theme Toggle Switch */}
+                        <button
+                            onClick={toggleTheme}
+                            className="relative flex items-center w-14 h-7 rounded-full bg-card-bg/50 backdrop-blur-glass border border-border/50 p-1 transition-all duration-500 hover:border-cyan-500/50 shadow-premium group overflow-hidden"
+                            aria-label="Toggle Theme"
+                        >
+                            {/* Sliding Track Background Highlight */}
+                            <div className={`absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 transition-opacity duration-500 ${isDark ? 'opacity-100' : 'opacity-0'}`}></div>
+
+                            {/* The Sliding Circle */}
+                            <div className={`relative z-10 flex items-center justify-center w-5 h-5 rounded-full shadow-lg transform transition-all duration-500 ease-out-back ${isDark ? 'translate-x-7 bg-background text-cyan-400' : 'translate-x-0 bg-foreground text-background'}`}>
+                                {isDark ? <Moon size={12} fill="currentColor" /> : <Sun size={12} fill="currentColor" />}
+                            </div>
+
+                            {/* Subtle Stationary Icons */}
+                            <div className="absolute inset-x-1 flex justify-between items-center px-1.5 pointer-events-none">
+                                <Sun size={10} className={`transition-opacity duration-300 ${!isDark ? 'opacity-0' : 'opacity-40 text-foreground'}`} />
+                                <Moon size={10} className={`transition-opacity duration-300 ${isDark ? 'opacity-0' : 'opacity-40 text-foreground'}`} />
+                            </div>
                         </button>
                         <button
                             onClick={() => navigate('/enroll')}
-                            className="relative group overflow-hidden px-6 py-2.5 rounded-full border border-border bg-foreground text-background text-sm font-bold uppercase tracking-wider transition-all duration-300"
+                            className={`relative group overflow-hidden px-6 ${scrolled ? 'py-1.5' : 'py-2.5'} rounded-full border border-border bg-foreground text-background text-sm font-bold uppercase tracking-wider transition-all duration-500`}
                         >
                             <span className="relative z-10 group-hover:text-white transition-colors duration-300">Enroll Now</span>
                             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
@@ -155,8 +185,15 @@ const Navbar = () => {
                     </div>
 
                     <div className="md:hidden flex items-center space-x-4">
-                        <button onClick={toggleTheme} className="text-foreground">
-                            {isDark ? <Sun size={20} /> : <Moon size={20} />}
+                        <button
+                            onClick={toggleTheme}
+                            className="relative flex items-center w-14 h-7 rounded-full bg-card-bg/50 backdrop-blur-glass border border-border/50 p-1 transition-all duration-500 shadow-premium group overflow-hidden"
+                            aria-label="Toggle Theme"
+                        >
+                            <div className={`absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 transition-opacity duration-500 ${isDark ? 'opacity-100' : 'opacity-0'}`}></div>
+                            <div className={`relative z-10 flex items-center justify-center w-5 h-5 rounded-full shadow-lg transform transition-all duration-500 ease-out-back ${isDark ? 'translate-x-7 bg-background text-cyan-400' : 'translate-x-0 bg-foreground text-background'}`}>
+                                {isDark ? <Moon size={12} fill="currentColor" /> : <Sun size={12} fill="currentColor" />}
+                            </div>
                         </button>
                         <button
                             className="text-foreground z-50 relative"
@@ -168,32 +205,41 @@ const Navbar = () => {
                 </div>
             </nav>
 
-            {/* Mobile Menu Fullscreen Overlay */}
+            {/* Premium Mobile Side Navigation (Drawer) */}
             <div
                 ref={menuRef}
-                className="fixed inset-0 z-40 bg-background flex flex-col items-center justify-center translate-y-[-100%]"
+                className="fixed inset-0 z-[100] translate-x-full"
             >
-                <div className="flex flex-col items-center space-y-8">
-                    {navLinks.map((item) => (
-                        <NavLink
-                            key={item.title}
-                            to={item.url}
-                            onClick={handleLinkClick}
-                            className="mobile-link text-4xl font-black text-foreground uppercase tracking-widest hover:text-cyan-500 transition-colors"
+                {/* Backdrop Overlay */}
+                <div
+                    className="absolute inset-0 bg-background/20 backdrop-blur-md"
+                    onClick={() => setMenuOpen(false)}
+                ></div>
+
+                {/* The Side Drawer Panel */}
+                <div className="absolute top-0 right-0 w-[80%] max-w-[400px] h-full bg-card-bg/95 backdrop-blur-2xl border-l border-border/50 shadow-2xl flex flex-col items-center justify-center">
+                    <div className="flex flex-col items-center space-y-10 w-full px-6">
+                        {navLinks.map((item) => (
+                            <NavLink
+                                key={item.title}
+                                to={item.url}
+                                onClick={handleLinkClick}
+                                className="mobile-link text-3xl font-black text-foreground uppercase tracking-widest hover:text-cyan-500 transition-colors"
+                            >
+                                {item.title}
+                            </NavLink>
+                        ))}
+                        <button
+                            onClick={() => {
+                                navigate('/enroll');
+                                handleLinkClick();
+                            }}
+                            className="mobile-link mt-8 w-full py-4 rounded-full border-2 border-foreground bg-foreground text-background text-lg font-black uppercase tracking-widest relative group overflow-hidden"
                         >
-                            {item.title}
-                        </NavLink>
-                    ))}
-                    <button
-                        onClick={() => {
-                            navigate('/enroll');
-                            handleLinkClick();
-                        }}
-                        className="mobile-link mt-8 px-10 py-4 rounded-full border-2 border-foreground bg-foreground text-background text-lg font-black uppercase tracking-widest relative group overflow-hidden"
-                    >
-                        <span className="relative z-10 group-hover:text-white transition-colors duration-300">Enroll Now</span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
-                    </button>
+                            <span className="relative z-10 group-hover:text-white transition-colors duration-300 px-6 whitespace-nowrap">Enroll Now</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+                        </button>
+                    </div>
                 </div>
             </div>
         </>

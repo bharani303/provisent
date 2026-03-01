@@ -73,15 +73,17 @@ const Services = () => {
 
     // Limit to 10 cards
     const displayCourses = SITE_DATA.courses.slice(0, 10);
+    const marqueeCourses = [...displayCourses, ...displayCourses];
 
     useEffect(() => {
-        let ctx = gsap.context(() => {
+        let mm = gsap.matchMedia();
+
+        mm.add("(min-width: 1024px)", () => {
+            // Desktop Horizontal Scroll
             const wrapper = scrollWrapperRef.current;
             const cards = gsap.utils.toArray(".service-card-wrapper");
 
-            // Main horizontal scroll
             const horizontalTween = gsap.to(wrapper, {
-                id: "horizontal-scroll",
                 x: () => -(wrapper.scrollWidth - window.innerWidth + 150),
                 ease: "none",
                 scrollTrigger: {
@@ -94,9 +96,7 @@ const Services = () => {
                 }
             });
 
-            // Individual card animations during scroll
             cards.forEach((card, i) => {
-                // Entrance stagger
                 gsap.from(card, {
                     y: 200,
                     opacity: 0,
@@ -111,9 +111,8 @@ const Services = () => {
                     }
                 });
 
-                // Tilt/Float effect on scroll
                 gsap.to(card, {
-                    y: i % 2 === 0 ? -40 : 40, // Zig-zag pattern
+                    y: i % 2 === 0 ? -40 : 40,
                     rotate: i % 2 === 0 ? 3 : -3,
                     scrollTrigger: {
                         trigger: card,
@@ -124,8 +123,22 @@ const Services = () => {
                     }
                 });
             });
+        });
 
-            // Refined Parallax for the title
+        mm.add("(max-width: 1023px)", () => {
+            // Mobile Continuous Infinite Marquee
+            const wrapper = scrollWrapperRef.current;
+
+            gsap.to(wrapper, {
+                x: "-50%",
+                duration: 60,
+                ease: "none",
+                repeat: -1
+            });
+        });
+
+        let ctx = gsap.context(() => {
+            // Common Animations
             gsap.from(".service-title-part", {
                 x: -100,
                 opacity: 0,
@@ -149,18 +162,20 @@ const Services = () => {
                     scrub: 1
                 }
             });
-
         }, containerRef);
 
-        return () => ctx.revert();
+        return () => {
+            mm.revert();
+            ctx.revert();
+        };
     }, []);
 
     return (
-        <section ref={containerRef} className="h-[80vh] md:h-screen bg-background overflow-hidden flex flex-col justify-center relative border-y border-border" id="expertise">
+        <section ref={containerRef} className="h-screen lg:h-screen bg-background lg:overflow-hidden flex flex-col justify-center relative border-y border-border py-24 lg:py-0" id="expertise">
             {/* Background elements */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] md:w-[1000px] h-[500px] md:h-[1000px] bg-purple-900/10 dark:bg-cyan-900/10 rounded-full blur-[80px] md:blur-[150px] pointer-events-none"></div>
 
-            <div ref={titleRef} className="absolute top-[5%] md:top-[10%] left-6 md:left-24 z-20 pointer-events-none">
+            <div ref={titleRef} className="lg:absolute top-[5%] md:top-[10%] left-6 md:left-24 z-20 pointer-events-none mb-4 lg:mb-0 px-6 lg:px-0">
                 <h2 className="text-[10px] md:text-sm font-bold tracking-widest text-cyan-500 uppercase mb-2 md:mb-4 flex items-center gap-2 md:gap-4 reveal-text">
                     <span className="w-8 md:w-12 h-[2px] bg-cyan-500"></span>
                     Elevate Your Future
@@ -171,10 +186,10 @@ const Services = () => {
                 </div>
             </div>
 
-            <div className="mt-24 md:mt-32 w-full flex items-center flex-1">
-                <div ref={scrollWrapperRef} className="flex gap-4 md:gap-24 px-6 md:px-24 w-fit items-center h-full">
-                    {displayCourses.map((service, i) => (
-                        <div key={i} className="flex-shrink-0 service-card-wrapper w-[80vw] md:w-auto">
+            <div className="lg:mt-32 w-full flex items-center flex-1 overflow-hidden lg:overflow-visible no-scrollbar">
+                <div ref={scrollWrapperRef} className="flex flex-row gap-16 lg:gap-24 px-6 lg:px-24 w-fit items-center h-full">
+                    {marqueeCourses.map((service, i) => (
+                        <div key={i} className="flex-shrink-0 service-card-wrapper w-[80vw] md:w-[45vw] lg:w-auto">
                             <ServiceCard service={service} index={i} />
                         </div>
                     ))}
