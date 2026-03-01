@@ -153,10 +153,11 @@ const Navbar = () => {
                         </button>
                         <button
                             onClick={() => navigate('/enroll')}
-                            className={`relative group overflow-hidden px-6 ${scrolled ? 'py-1.5' : 'py-2.5'} rounded-full border border-border bg-foreground text-background text-sm font-bold uppercase tracking-wider transition-all duration-500`}
+                            className={`relative group overflow-hidden px-8 ${scrolled ? 'py-2' : 'py-3'} rounded-full text-white text-sm font-bold uppercase tracking-wider transition-all duration-300 transform hover:scale-105 shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.6)]`}
                         >
-                            <span className="relative z-10 group-hover:text-white transition-colors duration-300">Enroll Now</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+                            <span className="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-cyan-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-[gradientSlowMove_4s_linear_infinite] z-0"></span>
+                            <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0 bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500"></span>
+                            <span className="relative z-10 flex items-center justify-center drop-shadow-md">Enroll Now</span>
                         </button>
                     </div>
 
@@ -216,12 +217,13 @@ const Navbar = () => {
                                 navigate('/enroll');
                                 handleLinkClick();
                             }}
-                            className={`mt-2 w-full py-4 rounded-full border-2 border-foreground bg-foreground text-background text-base font-black uppercase tracking-widest relative group overflow-hidden transition-all duration-500 transform ${menuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+                            className={`mt-4 w-full py-4 rounded-full text-white text-base font-black uppercase tracking-widest relative group overflow-hidden transition-all duration-500 transform shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] ${menuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                                 }`}
                             style={{ transitionDelay: `${menuOpen ? 150 + navLinks.length * 60 : 0}ms` }}
                         >
-                            <span className="relative z-10 group-hover:text-white transition-colors duration-300 px-6 whitespace-nowrap">Enroll Now</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
+                            <span className="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-cyan-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-[gradientSlowMove_4s_linear_infinite] z-0"></span>
+                            <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0 bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500"></span>
+                            <span className="relative z-10 drop-shadow-md transition-colors duration-300 px-6 whitespace-nowrap">Enroll Now</span>
                         </button>
                     </div>
                 </div>

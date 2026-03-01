@@ -201,9 +201,11 @@ const CourseDetail = () => {
                                     <div className="pt-6">
                                         <button
                                             onClick={() => navigate('/enroll')}
-                                            className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-white text-sm font-black uppercase tracking-widest rounded-xl hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all duration-300 hover:scale-105"
+                                            className="relative group overflow-hidden w-full sm:w-auto px-10 py-4 text-white text-sm font-black uppercase tracking-widest rounded-xl shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] transition-all duration-300 transform hover:-translate-y-1"
                                         >
-                                            Enroll Now
+                                            <span className="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-cyan-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-[gradientSlowMove_4s_linear_infinite] z-0"></span>
+                                            <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0 bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500"></span>
+                                            <span className="relative z-10 drop-shadow-md">Enroll Now</span>
                                         </button>
                                     </div>
                                 </div>
@@ -373,9 +375,11 @@ const CourseDetail = () => {
 
                                     <button
                                         onClick={() => navigate('/enroll')}
-                                        className="w-full py-3.5 bg-white text-black text-sm font-black uppercase tracking-widest rounded-xl hover:bg-cyan-500 hover:text-white transition-colors duration-300"
+                                        className="relative group overflow-hidden w-full py-4 text-white text-sm font-black uppercase tracking-widest rounded-xl shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] transition-all duration-300 transform hover:-translate-y-1 mt-2"
                                     >
-                                        Start Application
+                                        <span className="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-cyan-500 via-purple-500 to-cyan-500 bg-[length:200%_auto] animate-[gradientSlowMove_4s_linear_infinite] z-0"></span>
+                                        <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0 bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500"></span>
+                                        <span className="relative z-10 drop-shadow-md">Start Application</span>
                                     </button>
                                 </div>
 
