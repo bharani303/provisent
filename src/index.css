@@ -38,10 +38,15 @@
     color: var(--foreground);
     font-family: 'Inter', sans-serif;
     transition: background-color 0.5s ease, color 0.5s ease;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
   }
 
   html {
     scroll-behavior: auto !important;
+    overflow-x: hidden;
+    width: 100%;
   }
 
   ::selection {
@@ -152,27 +157,52 @@
   }
 }
 
+/* 4K Cinematic Grain Effect */
+.bg-grain {
+  pointer-events: none;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  filter: contrast(150%) brightness(100%);
+  z-index: 5;
+}
+
+@keyframes ethereal-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(5%, 5%) scale(1.05);
+  }
+
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+.animate-ethereal {
+  animation: ethereal-drift 20s ease-in-out infinite;
+}
+
 @keyframes float {
 
   0%,
   100% {
-    transform: translateY(0) rotate(12deg);
+    transform: translateY(0);
   }
 
   50% {
-    transform: translateY(-20px) rotate(15deg);
+    transform: translateY(-15px);
   }
 }
 
 @keyframes floatReverse {
 
   0%,
-  0%,
   100% {
-    transform: translateY(0) rotate(0deg);
+    transform: translateY(0);
   }
 
   50% {
-    transform: translateY(15px) rotate(-5deg);
+    transform: translateY(15px);
   }
 }

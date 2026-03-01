@@ -2,12 +2,14 @@ import React, { useRef, useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useFlow } from '../../animations/FlowContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const PageTransition = ({ children }) => {
     const containerRef = useRef();
     const location = useLocation();
+    const { isReady } = useFlow();
 
     // Reset scroll position on route change before GSAP runs
     useLayoutEffect(() => {
@@ -15,8 +17,14 @@ const PageTransition = ({ children }) => {
     }, [location.pathname]);
 
     useLayoutEffect(() => {
+        // Only trigger the main page fade-in if we're "ready" (modal flow finished)
+        if (!isReady) {
+            gsap.set(containerRef.current, { opacity: 0 });
+            return;
+        }
+
         let ctx = gsap.context(() => {
-            // Fade animation (y-transform removed to prevent breaking ScrollTrigger fixed pins)
+            // Fade animation
             gsap.fromTo(
                 containerRef.current,
                 { opacity: 0 },
@@ -31,7 +39,7 @@ const PageTransition = ({ children }) => {
         }, containerRef);
 
         return () => ctx.revert();
-    }, [location.pathname]);
+    }, [location.pathname, isReady]);
 
     return (
         <div ref={containerRef} className="page-transition-wrapper">

@@ -6,7 +6,8 @@ import { useSmoothScroll } from './animations/useSmoothScroll';
 
 // Lazy loading Pages for performance and code splitting
 const Home = lazy(() => import('./pages/Home'));
-const Programs = lazy(() => import('./pages/Programs'));
+const CourseList = lazy(() => import('./pages/CourseList'));
+const CourseDetail = lazy(() => import('./pages/CourseDetail'));
 const Certificates = lazy(() => import('./pages/Certificates'));
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -40,27 +41,44 @@ const PageLoader = () => (
   </div>
 );
 
+import LeadModal from './components/modals/LeadModal';
+import { FlowProvider, useFlow } from './animations/FlowContext';
+
+// Main App Wrapper to use Context
+const AppContent = () => {
+  const { markReady } = useFlow();
+
+  return (
+    <div className="bg-background text-foreground min-h-screen selection:bg-cyan-500/30 font-sans transition-colors duration-500 ease-in-out">
+      <Navbar />
+
+      <LeadModal onComplete={markReady} />
+
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/programs" element={<CourseList />} />
+          <Route path="/course/:id" element={<CourseDetail />} />
+          <Route path="/certificates" element={<Certificates />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/enroll" element={<EnrollNow />} />
+        </Routes>
+      </Suspense>
+
+      <Footer />
+    </div>
+  );
+}
+
 function App() {
   useSmoothScroll(); // Initialize global smooth scrolling
 
   return (
     <Router>
-      <div className="bg-background text-foreground min-h-screen selection:bg-cyan-500/30 font-sans transition-colors duration-500 ease-in-out">
-        <Navbar />
-
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/programs" element={<Programs />} />
-            <Route path="/certificates" element={<Certificates />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/enroll" element={<EnrollNow />} />
-          </Routes>
-        </Suspense>
-
-        <Footer />
-      </div>
+      <FlowProvider>
+        <AppContent />
+      </FlowProvider>
     </Router>
   );
 }

@@ -70,20 +70,29 @@ const Navbar = () => {
         return () => ctx.revert();
     }, []);
 
-    // GSAP Mobile Menu Animation (Side Drawer)
+    // GSAP Mobile Menu Animation (Side Drawer) - MORE ROBUST FOR MOBILE
     useLayoutEffect(() => {
         let ctx = gsap.context(() => {
             tl.current = gsap.timeline({ paused: true })
                 .to(menuRef.current, {
-                    x: "0%",
+                    autoAlpha: 1,
+                    duration: 0.1,
+                    pointerEvents: "auto"
+                })
+                .from(".drawer-backdrop", {
+                    opacity: 0,
+                    duration: 0.4
+                }, 0)
+                .from(".drawer-panel", {
+                    x: "100%",
                     duration: 0.6,
                     ease: "power4.inOut"
-                })
+                }, 0)
                 .from(".mobile-link", {
                     x: 50,
                     opacity: 0,
-                    stagger: 0.1,
-                    duration: 0.4,
+                    stagger: 0.08,
+                    duration: 0.5,
                     ease: "power2.out"
                 }, "-=0.3");
         });
@@ -118,8 +127,8 @@ const Navbar = () => {
                         onClick={() => navigate('/')}
                         onMouseEnter={() => setIsLogoHovered(true)}
                         onMouseLeave={() => setIsLogoHovered(false)}
-                        className={`cursor-pointer relative flex items-center transition-all duration-500 py-1 ${scrolled ? 'h-12 md:h-14' : 'h-16 md:h-24'
-                            } hover:scale-110`}
+                        className={`cursor-pointer relative flex items-center transition-all duration-500 py-1 ${scrolled ? 'h-10 md:h-14' : 'h-14 md:h-24'
+                            } hover:scale-105 md:hover:scale-110`}
                     >
                         {/* Light Logo (logo.png) - This one defines the container's width */}
                         <img
@@ -196,10 +205,10 @@ const Navbar = () => {
                             </div>
                         </button>
                         <button
-                            className="text-foreground z-50 relative"
+                            className="text-foreground z-50 relative p-2 -mr-2"
                             onClick={() => setMenuOpen(!menuOpen)}
                         >
-                            {menuOpen ? <X size={28} /> : <Menu size={28} />}
+                            {menuOpen ? <X size={24} className="md:w-7 md:h-7" /> : <Menu size={24} className="md:w-7 md:h-7" />}
                         </button>
                     </div>
                 </div>
@@ -208,23 +217,24 @@ const Navbar = () => {
             {/* Premium Mobile Side Navigation (Drawer) */}
             <div
                 ref={menuRef}
-                className="fixed inset-0 z-[100] translate-x-full"
+                className="fixed top-0 left-0 w-screen h-screen z-[9999] invisible pointer-events-none"
+                style={{ opacity: 0 }}
             >
                 {/* Backdrop Overlay */}
                 <div
-                    className="absolute inset-0 bg-background/20 backdrop-blur-md"
+                    className="drawer-backdrop absolute inset-0 bg-black/60 backdrop-blur-md"
                     onClick={() => setMenuOpen(false)}
                 ></div>
 
                 {/* The Side Drawer Panel */}
-                <div className="absolute top-0 right-0 w-[80%] max-w-[400px] h-full bg-card-bg/95 backdrop-blur-2xl border-l border-border/50 shadow-2xl flex flex-col items-center justify-center">
-                    <div className="flex flex-col items-center space-y-10 w-full px-6">
+                <div className="drawer-panel absolute top-0 right-0 w-[85%] max-w-[350px] h-full bg-background border-l border-border/50 shadow-2xl flex flex-col items-center justify-center">
+                    <div className="flex flex-col items-center space-y-6 w-full px-4">
                         {navLinks.map((item) => (
                             <NavLink
                                 key={item.title}
                                 to={item.url}
                                 onClick={handleLinkClick}
-                                className="mobile-link text-3xl font-black text-foreground uppercase tracking-widest hover:text-cyan-500 transition-colors"
+                                className="mobile-link text-2xl font-black text-foreground uppercase tracking-widest hover:text-cyan-500 transition-colors w-full text-center py-3"
                             >
                                 {item.title}
                             </NavLink>
@@ -234,7 +244,7 @@ const Navbar = () => {
                                 navigate('/enroll');
                                 handleLinkClick();
                             }}
-                            className="mobile-link mt-8 w-full py-4 rounded-full border-2 border-foreground bg-foreground text-background text-lg font-black uppercase tracking-widest relative group overflow-hidden"
+                            className="mobile-link mt-2 w-full py-4 rounded-full border-2 border-foreground bg-foreground text-background text-base font-black uppercase tracking-widest relative group overflow-hidden"
                         >
                             <span className="relative z-10 group-hover:text-white transition-colors duration-300 px-6 whitespace-nowrap">Enroll Now</span>
                             <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>

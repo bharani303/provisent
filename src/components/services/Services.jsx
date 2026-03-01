@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Sun, Moon, Menu, X, ArrowRight, Star, Users, Clock } from 'lucide-react';
 import { use3DTilt } from '../../animations/use3DTilt';
 import { SITE_DATA } from '../../data/siteContent';
 
@@ -17,7 +18,7 @@ const ServiceCard = ({ service }) => {
             style={style}
             onMouseMove={onMouseMove}
             onMouseLeave={onMouseLeave}
-            className="w-[85vw] md:w-[45vw] lg:w-[35vw] h-[65vh] md:h-[75vh] rounded-[2.5rem] p-8 md:p-12 flex flex-col justify-end relative overflow-hidden group cursor-pointer border border-border bg-card-bg shadow-premium backdrop-blur-glass transition-all duration-700 hover:-translate-y-4"
+            className="w-[80vw] md:w-[45vw] lg:w-[35vw] h-[50vh] md:h-[65vh] rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-12 flex flex-col justify-end relative overflow-hidden group cursor-pointer border border-border bg-card-bg shadow-premium backdrop-blur-glass transition-all duration-700 hover:-translate-y-4"
             onClick={() => navigate('/programs')}
         >
             {/* Background Image Parallax effect via CSS */}
@@ -35,13 +36,20 @@ const ServiceCard = ({ service }) => {
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent dark:from-black dark:via-black/80 dark:to-transparent z-10 transition-colors duration-500"></div>
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 z-10 mix-blend-multiply dark:mix-blend-overlay"></div>
 
-            <div className="relative z-20 flex flex-col h-full justify-between transform translate-y-8 group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]">
-                <div className="flex justify-between items-start opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100">
-                    <span className="text-cyan-600 dark:text-cyan-400 font-mono text-[10px] md:text-sm font-bold tracking-widest uppercase py-1.5 px-3 md:py-2 md:px-5 border border-cyan-400/30 rounded-full bg-card-bg backdrop-blur-glass shadow-premium">
-                        {service.category}
-                    </span>
+            <div className="relative z-20 flex flex-col h-full justify-between transform translate-y-0 md:translate-y-8 md:group-hover:translate-y-0 transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]">
+                <div className="flex justify-between items-start opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-700 delay-100">
+                    <div className="flex flex-col gap-2">
+                        <span className="text-cyan-600 dark:text-cyan-400 font-mono text-[10px] md:text-sm font-bold tracking-widest uppercase py-1.5 px-3 md:py-2 md:px-5 border border-cyan-400/30 rounded-full bg-card-bg backdrop-blur-glass shadow-premium">
+                            {service.category}
+                        </span>
+                        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-white/10">
+                            <Star size={12} className="text-yellow-400 fill-yellow-400" />
+                            <span className="text-[10px] font-black text-white">{service.rating}</span>
+                            <span className="text-[8px] text-white/40 uppercase font-bold ml-1">({service.students} students)</span>
+                        </div>
+                    </div>
                     <div className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-border flex items-center justify-center bg-card-bg backdrop-blur-glass group-hover:bg-foreground group-hover:text-background transition-all duration-500 hover:scale-110 shadow-premium">
-                        <svg className="w-4 h-4 md:w-6 md:h-6 translate-x-[1px] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        <ArrowRight className="w-4 h-4 md:w-6 md:h-6 translate-x-[1px] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-500" />
                     </div>
                 </div>
 
@@ -49,11 +57,17 @@ const ServiceCard = ({ service }) => {
                     <span className="block text-foreground/50 text-[10px] md:text-sm tracking-widest uppercase mb-2 md:mb-4 font-bold">
                         {service.duration}
                     </span>
-                    <h3 className="text-2xl md:text-5xl lg:text-6xl font-black text-foreground mb-3 md:mb-6 uppercase tracking-tighter leading-[0.9] group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-foreground group-hover:to-foreground/50 transition-all duration-500">
-                        {service.title}
-                    </h3>
+                    <div className="flex items-center justify-between mb-3 md:mb-6">
+                        <h3 className="text-2xl md:text-5xl lg:text-6xl font-black text-foreground uppercase tracking-tighter leading-[0.9] group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-foreground group-hover:to-foreground/50 transition-all duration-500">
+                            {service.title}
+                        </h3>
+                        <div className="text-right block">
+                            <span className="block text-cyan-500 font-mono font-black text-sm md:text-2xl">{service.price}</span>
+                            <span className="text-[8px] uppercase tracking-widest text-white/40">Starts from</span>
+                        </div>
+                    </div>
 
-                    <div className="flex flex-wrap gap-1.5 md:gap-2 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-300">
+                    <div className="flex flex-wrap gap-1.5 md:gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-700 delay-300">
                         {service.tags.map(tag => (
                             <span key={tag} className="text-[9px] md:text-xs uppercase font-bold tracking-widest text-white/70 border border-white/20 px-2 py-1 md:px-3 md:py-1.5 rounded-full hover:bg-white/10 transition-colors">
                                 #{tag}
@@ -126,14 +140,37 @@ const Services = () => {
         });
 
         mm.add("(max-width: 1023px)", () => {
-            // Mobile Continuous Infinite Marquee
+            // Mobile Horizontal Scroll with GSAP
             const wrapper = scrollWrapperRef.current;
+            const cards = gsap.utils.toArray(".service-card-wrapper");
 
             gsap.to(wrapper, {
-                x: "-50%",
-                duration: 60,
+                x: () => -(wrapper.scrollWidth - window.innerWidth + 50),
                 ease: "none",
-                repeat: -1
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    pin: true,
+                    scrub: 1,
+                    start: "top top",
+                    end: () => `+=${wrapper.scrollWidth}`,
+                    invalidateOnRefresh: true
+                }
+            });
+
+            cards.forEach((card, i) => {
+                gsap.from(card, {
+                    y: 100,
+                    opacity: 0,
+                    scale: 0.9,
+                    duration: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "left right",
+                        toggleActions: "play none none reverse",
+                        containerAnimation: null // Using global scroll trigger here
+                    }
+                });
             });
         });
 
@@ -187,8 +224,8 @@ const Services = () => {
             </div>
 
             <div className="lg:mt-32 w-full flex items-center flex-1 overflow-hidden lg:overflow-visible no-scrollbar">
-                <div ref={scrollWrapperRef} className="flex flex-row gap-16 lg:gap-24 px-6 lg:px-24 w-fit items-center h-full">
-                    {marqueeCourses.map((service, i) => (
+                <div ref={scrollWrapperRef} className="flex flex-row gap-4 md:gap-16 lg:gap-24 px-6 lg:px-24 w-fit items-center h-full">
+                    {displayCourses.map((service, i) => (
                         <div key={i} className="flex-shrink-0 service-card-wrapper w-[80vw] md:w-[45vw] lg:w-auto">
                             <ServiceCard service={service} index={i} />
                         </div>

@@ -1,10 +1,15 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { useFlow } from './FlowContext';
 
 export const useHeroAnimation = () => {
     const heroRef = useRef(null);
+    const { isReady } = useFlow();
 
     useEffect(() => {
+        // Only start animations if the entry flow (modal) is complete
+        if (!isReady) return;
+
         let mm = gsap.matchMedia();
 
         mm.add("(min-width: 768px)", () => {
@@ -106,7 +111,7 @@ export const useHeroAnimation = () => {
                     opacity: 0,
                     y: 20,
                     duration: 1,
-                    delay: 1.8,
+                    delay: 1.4, // Reduced delay since modal took some time
                     ease: "power2.out"
                 });
 
@@ -115,7 +120,7 @@ export const useHeroAnimation = () => {
                     {
                         innerText: target,
                         duration: 2,
-                        delay: 2.2,
+                        delay: 1.8,
                         ease: "power2.out",
                         snap: { innerText: 1 },
                         onUpdate: function () {
@@ -170,9 +175,9 @@ export const useHeroAnimation = () => {
                         x: -window.innerWidth,
                         y: window.innerHeight * 0.8,
                         opacity: 1,
-                        scale: i === 1 ? 4 : 3, // Second one is even bigger
+                        scale: i === 1 ? 4 : 3,
                         duration: 1.8,
-                        delay: 2.5 + (i * 0.6), // Slightly more delay to see it clearly after landing
+                        delay: 2.5 + (i * 0.6),
                         ease: "power2.in",
                         onComplete: () => {
                             gsap.to(star, { opacity: 0, duration: 0.3 });
@@ -187,7 +192,7 @@ export const useHeroAnimation = () => {
             ctx.revert();
             mm.revert();
         };
-    }, []);
+    }, [isReady]);
 
     return heroRef;
 };

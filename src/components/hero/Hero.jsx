@@ -26,16 +26,26 @@ const Hero = () => {
             {/* 2 Cinematic Falling Stars Component */}
             <FallingStarsBackground />
 
-            {/* Background Layers */}
+            {/* 4K Cinematic Grain Overlay */}
+            <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] bg-grain pointer-events-none z-5"></div>
+
+            {/* Background Layers - EPIC ETHEREAL ATMOSPHERE */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.07] neural-grid-overlay bg-foreground/5"></div>
-                {/* Light mode: extra brightness, Dark mode: subtle drift */}
-                <div className="organic-blob absolute top-1/4 -left-16 md:-left-32 w-64 h-64 md:w-[600px] md:h-[600px] bg-gradient-to-br from-cyan-400/30 to-purple-400/20 dark:from-cyan-500/20 dark:to-purple-500/10 rounded-full blur-[100px] md:blur-[160px] opacity-60 dark:opacity-40 animate-drift-slow"></div>
-                <div className="organic-blob-reverse absolute bottom-1/4 -right-16 md:-right-32 w-80 h-80 md:w-[800px] md:h-[800px] bg-gradient-to-tr from-purple-400/30 to-pink-400/20 dark:from-purple-500/20 dark:to-pink-500/10 rounded-full blur-[120px] md:blur-[200px] opacity-60 dark:opacity-40 animate-drift-slow-reverse"></div>
+                <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05] neural-grid-overlay bg-foreground/5"></div>
+
+                {/* Desktop Drift Blobs */}
+                <div className="hidden md:block organic-blob absolute top-1/4 -left-16 md:-left-32 w-64 h-64 md:w-[600px] md:h-[600px] bg-gradient-to-br from-cyan-400/30 to-purple-400/20 dark:from-cyan-500/20 dark:to-purple-500/10 rounded-full blur-[100px] md:blur-[160px] opacity-60 dark:opacity-40 animate-drift-slow"></div>
+                <div className="hidden md:block organic-blob-reverse absolute bottom-1/4 -right-16 md:-right-32 w-80 h-80 md:w-[800px] md:h-[800px] bg-gradient-to-tr from-purple-400/30 to-pink-400/20 dark:from-purple-500/20 dark:to-pink-500/10 rounded-full blur-[120px] md:blur-[200px] opacity-60 dark:opacity-40 animate-drift-slow-reverse"></div>
+
+                {/* Mobile Ethereal Core (Clean & Epic) */}
+                <div className="md:hidden">
+                    <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[350px] h-[350px] bg-gradient-to-br from-cyan-500/20 via-purple-500/10 to-transparent rounded-full blur-[80px] animate-ethereal"></div>
+                    <div className="absolute bottom-[10%] left-[-10%] w-[300px] h-[300px] bg-purple-600/10 rounded-full blur-[100px] animate-ethereal delay-1000"></div>
+                </div>
             </div>
 
-            {/* 3D Background */}
-            <div className="absolute inset-0 z-0 hero-bg-blur opacity-90 dark:opacity-90 pointer-events-auto transition-opacity duration-1000">
+            {/* 3D Background - Desktop Only */}
+            <div className="absolute inset-0 z-0 hero-bg-blur opacity-90 dark:opacity-90 pointer-events-auto transition-opacity duration-1000 hidden md:block">
                 <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
                     <HeroScene />
                 </Canvas>
@@ -46,7 +56,7 @@ const Hero = () => {
                 {/* Hero Badge */}
                 <div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card-bg/50 dark:bg-card-bg backdrop-blur-glass shadow-premium mb-6 md:mb-8">
                     <Sparkles className="w-4 h-4 text-cyan-500" />
-                    <span className="text-[10px] md:text-sm font-bold tracking-wide text-foreground/80 uppercase">
+                    <span className="text-[10px] md:text-sm font-black tracking-wide text-foreground/80 uppercase">
                         {SITE_DATA.hero.badge}
                     </span>
                 </div>
@@ -67,20 +77,20 @@ const Hero = () => {
                 </p>
 
                 {/* Counter Statistics */}
-                <div className="hero-cta w-full max-w-4xl mx-auto grid grid-cols-3 md:flex md:flex-row items-center justify-center gap-2 md:gap-0 mb-12 md:mb-20">
-                    <div className="flex flex-col items-center flex-1 relative px-2">
-                        <span className="stat-number text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-foreground" data-target="50" data-suffix="K+">0</span>
-                        <span className="text-[7px] md:text-xs uppercase tracking-widest text-foreground/40 dark:text-foreground/30 mt-2 font-black text-center whitespace-nowrap">Students</span>
+                <div className="hero-cta w-full max-w-4xl mx-auto grid grid-cols-3 md:flex md:flex-row items-center justify-center gap-1 md:gap-0 mb-8 md:mb-20">
+                    <div className="flex flex-col items-center flex-1 relative px-1">
+                        <span className="stat-number text-lg sm:text-3xl md:text-4xl lg:text-5xl font-black text-foreground" data-target="50" data-suffix="K+">0</span>
+                        <span className="text-[6px] md:text-xs uppercase tracking-tight md:tracking-widest text-foreground/40 dark:text-foreground/30 mt-2 font-black text-center">Students</span>
                         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[1px] h-6 md:h-12 bg-border/50"></div>
                     </div>
-                    <div className="flex flex-col items-center flex-1 relative px-2">
-                        <span className="stat-number text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-cyan-500 dark:text-cyan-400" data-target="120" data-suffix="+">0</span>
-                        <span className="text-[7px] md:text-xs uppercase tracking-widest text-foreground/40 dark:text-foreground/30 mt-2 font-black text-center whitespace-nowrap">Countries</span>
+                    <div className="flex flex-col items-center flex-1 relative px-1">
+                        <span className="stat-number text-lg sm:text-3xl md:text-4xl lg:text-5xl font-black text-cyan-500 dark:text-cyan-400" data-target="120" data-suffix="+">0</span>
+                        <span className="text-[6px] md:text-xs uppercase tracking-tight md:tracking-widest text-foreground/40 dark:text-foreground/30 mt-2 font-black text-center">Countries</span>
                         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[1px] h-6 md:h-12 bg-border/50"></div>
                     </div>
-                    <div className="flex flex-col items-center flex-1 px-2">
-                        <span className="stat-number text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-pink-500" data-target="98" data-suffix="%">0</span>
-                        <span className="text-[7px] md:text-xs uppercase tracking-widest text-foreground/40 dark:text-foreground/30 mt-2 font-black text-center whitespace-nowrap">Success</span>
+                    <div className="flex flex-col items-center flex-1 px-1">
+                        <span className="stat-number text-lg sm:text-3xl md:text-4xl lg:text-5xl font-black text-pink-500" data-target="98" data-suffix="%">0</span>
+                        <span className="text-[6px] md:text-xs uppercase tracking-tight md:tracking-widest text-foreground/40 dark:text-foreground/30 mt-2 font-black text-center">Success</span>
                     </div>
                 </div>
 

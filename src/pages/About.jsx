@@ -79,19 +79,22 @@ const About = () => {
             // Team Cards Reveal
             const teamCards = gsap.utils.toArray(".team-card");
             teamCards.forEach((card, i) => {
-                gsap.from(card, {
-                    y: 100,
-                    opacity: 0,
-                    rotateX: -15,
-                    transformPerspective: 1000,
-                    duration: 1.2,
-                    ease: "power3.out",
-                    delay: (i % 3) * 0.1, // Stagger effect per row
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 90%"
+                gsap.fromTo(card,
+                    { y: 60, opacity: 0, scale: 0.95 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        scale: 1,
+                        duration: 0.8,
+                        ease: "power3.out",
+                        delay: (i % 3) * 0.15,
+                        clearProps: "all", // Allows hover:-translate-y-2 to work after animation
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 85%"
+                        }
                     }
-                });
+                );
             });
 
         }, mainRef);
